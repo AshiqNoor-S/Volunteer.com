@@ -1,13 +1,19 @@
 import { ThemeProvider } from "styled-components";
 import { GlobalStyle } from "./styles/GlobalStyle";
 import { Theme } from "./styles/Theme";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Navigate, Routes, Route } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import Header from "./components/Header";
 import Home from "./pages/Home";
 import MyProfile from "./pages/MyProfile";
+import LoginPage from "./pages/loginPage";
+import ProfilePage from "./pages/profilePage";
 
-const App = () => {
+function App() {
+
+  const isAuth = Boolean(useSelector((state) => state.token));
+
   return (
     <>
       <ThemeProvider theme={Theme}>
@@ -15,7 +21,11 @@ const App = () => {
         <BrowserRouter>
           <Header />
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<LoginPage />} />
+            <Route
+              path="/home"
+              element={isAuth ? <HomePage /> : <Navigate to="/" />}
+            />
             <Route path="/myprofile" element={<MyProfile />} />
           </Routes>
         </BrowserRouter>
