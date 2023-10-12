@@ -18,7 +18,7 @@ function App() {
       <ThemeProvider theme={Theme}>
         <GlobalStyle />
         <BrowserRouter>
-          <Header />
+          {isAuth ? <Header /> : <p></p>}
           <Routes>
             <Route path="/" element={<LoginPage />} />
             <Route
