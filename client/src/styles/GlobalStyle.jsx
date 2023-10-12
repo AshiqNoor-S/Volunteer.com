@@ -39,28 +39,28 @@ body::-webkit-scrollbar-thumb {
 
 h1{
   color:${({ theme }) => theme.colors.heading};
-  font-size: 6rem;
+  font-size: 5.5rem;
   font-weight: 900;
 }
 
 h2 {
    color: ${({ theme }) => theme.colors.heading};
-   font-size: 4.4rem;
+   font-size: 4.1rem;
    font-weight: 300;
    white-space: normal;
    text-align: center;
   }
 
   h3 {
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   font-weight: 400;
 }
 
 p {
   color: ${({ theme }) => theme.colors.text};
   opacity: .7;
-  font-size: 1.65rem;
-  line-height: 1.5;
+  font-size: 1.3rem;
+  line-height: 1.3;
   margin-top: 1rem;
   font-weight:400;
 }
@@ -93,7 +93,7 @@ li {
 }
 
 .grid-four-column{
-   grid-template-columns: 1fr 1.2fr .5fr .8fr ;
+   grid-template-columns: repeat(4, 1fr);
 }
 
   .common-heading {

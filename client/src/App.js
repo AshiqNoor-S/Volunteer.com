@@ -1,3 +1,4 @@
+import React from "react";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyle } from "./styles/GlobalStyle";
 import { Theme } from "./styles/Theme";
@@ -8,9 +9,9 @@ import Header from "./components/Header";
 import Home from "./pages/Home";
 import MyProfile from "./pages/MyProfile";
 import LoginPage from "./pages/LoginPage";
+import Footer from "./components/Footer";
 
 function App() {
-
   const isAuth = Boolean(useSelector((state) => state.token));
 
   return (
@@ -27,10 +28,11 @@ function App() {
             />
             <Route path="/myprofile" element={<MyProfile />} />
           </Routes>
+          <Footer />
         </BrowserRouter>
       </ThemeProvider>
     </>
   );
-};
+}
 
 export default App;
