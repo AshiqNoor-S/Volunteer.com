@@ -5,7 +5,8 @@ export const GlobalStyle = createGlobalStyle`
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Work Sans', sans-serif;
+  ${'' /* font-family: 'Work Sans', sans-serif; */}
+  font-family: 'Poppins', sans-serif;
  }
 html {
   font-size: 62.5%;
@@ -108,7 +109,7 @@ li {
     color: ${({ theme }) => theme.colors.black};
     padding: 1.6rem 2.4rem;
     border: 1px solid ${({ theme }) => theme.colors.border};
-    text-transform: uppercase;
+    ${'' /* text-transform: uppercase; */}
    box-shadow: ${({ theme }) => theme.colors.shadowSupport};
 }
     input[type="submit"]{
