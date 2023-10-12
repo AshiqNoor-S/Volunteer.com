@@ -7,8 +7,7 @@ import { useSelector } from "react-redux";
 import Header from "./components/Header";
 import Home from "./pages/Home";
 import MyProfile from "./pages/MyProfile";
-import LoginPage from "./pages/loginPage";
-import ProfilePage from "./pages/profilePage";
+import LoginPage from "./pages/LoginPage";
 
 function App() {
 
@@ -24,7 +23,7 @@ function App() {
             <Route path="/" element={<LoginPage />} />
             <Route
               path="/home"
-              element={isAuth ? <HomePage /> : <Navigate to="/" />}
+              element={isAuth ? <Home /> : <Navigate to="/" />}
             />
             <Route path="/myprofile" element={<MyProfile />} />
           </Routes>
