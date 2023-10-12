@@ -88,6 +88,8 @@ const Footer = () => {
                 <AiOutlineCopyright />
                 &nbsp;
                 {new Date().getFullYear()} Volunteer. All Rights Reserved
+                Copyright <AiOutlineCopyright /> 
+                {new Date().getFullYear()} Volunteer. All Rights Reserved.
               </p>
             </div>
           </div>
