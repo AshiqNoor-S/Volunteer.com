@@ -75,9 +75,8 @@ const Footer = () => {
             <hr />
             <div className="container copy-right">
               <p>
-                Copyright
-                <AiOutlineCopyright />
-                {new Date().getFullYear()} Volunteer. All Rights Reserved
+                Copyright <AiOutlineCopyright /> 
+                {new Date().getFullYear()} Volunteer. All Rights Reserved.
               </p>
             </div>
           </div>
