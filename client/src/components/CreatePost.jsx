@@ -9,9 +9,6 @@ const CreatePost = (props) => {
 				<div className="form-container">
 					<textarea id="create-post-text" name="create-post-text" className='create-post-textarea' rows={10} cols={10} placeholder='Create a post...'>
 					</textarea>
-
-						
-
 					<div className="containerss">
 						<span><button className="upload-button inline-buttons">Upload Photos/Videos</button></span>
 						<a href='#'><img src='./images/post_icon.png' className="post-icon" style={{ width: '32px' }} /></a>
