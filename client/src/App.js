@@ -22,8 +22,7 @@ function App() {
           {<Header />}
           <Routes>
             <Route path="/" element={<LoginPage />} />
-            <Route path="/home" element={<Home />} />
-            {/* element={isAuth ? <Home /> : <Navigate to="/" />} */}
+            <Route path="/home" element={isAuth ? <Home /> : <Navigate to="/" />} />
             <Route path="/myprofile" element={<MyProfile />} />
           </Routes>
           <Footer />
