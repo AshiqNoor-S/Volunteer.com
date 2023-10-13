@@ -16,7 +16,7 @@ const Navbar = () => {
             <NavLink
               className="navbar-link"
               onClick={() => setOpenMenu(false)}
-              to="/"
+              to="/home"
             >
               Home
             </NavLink>
