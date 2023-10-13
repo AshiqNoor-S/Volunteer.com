@@ -8,7 +8,7 @@ const Home = () => {
   const { _id, picturePath } = useSelector((state) => state.user);
   return (
     <div>
-      {/* <CreatePost /> */}
+      <CreatePost />
       <hr style={{width: '59%', margin: 'auto', marginTop: '6vh'}} />
       {userPosts.map((post) => (
         <Post userName={post.userName}
