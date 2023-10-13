@@ -1,23 +1,6 @@
 import styled from "styled-components";
 
 export const PostStyle = styled.div`
-  /* padding: 0 4.8rem;
-  height: 100rem;
-  background-color: ${({ theme }) => theme.colors.bg};
-  display: flex;
-  justify-content: space-between;
-  align-items: center; */
-
-  /* .logo {
-    height: auto;
-    max-width: 30%;
-  } */
-
-  /* @media (max-width: ${({ theme }) => theme.media.tab}) {
-    .logo {
-      max-width: 45%;
-    }
-  } */
 
   margin: auto;
   margin-top: 6vh;
@@ -26,7 +9,6 @@ export const PostStyle = styled.div`
   padding: 4vh 4vw;
   border-radius: 20px;
   background-color: #bc6ff1;
-  /* background-color: ${({ theme }) => theme.colors.bg}; */
   color: #fff !important;
 
   .postUserImage {
@@ -34,7 +16,6 @@ export const PostStyle = styled.div`
   }
 
   .postHeaderContent {
-    /* padding-top: 2px; */
     position: relative;
     left: 2vw;
     top: 0.5vh;
@@ -101,7 +82,7 @@ export const PostStyle = styled.div`
   }
 
   ::placeholder {
-  color: #bc6ff1;/
+  color: #bc6ff1;
   font-weight: 900;
   /* opacity: 1; */
 }
@@ -141,5 +122,13 @@ export const PostStyle = styled.div`
   .commentContent {
     margin-top: 3vh;
   }
+
+  @media (max-width: ${({ theme }) => theme.media.tab}) {
+		
+	}
+
+	@media (max-width: ${({ theme }) => theme.media.mobile}) {
+
+	}
 
 `;
