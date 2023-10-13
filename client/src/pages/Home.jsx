@@ -6,7 +6,7 @@ import Post from "../components/Post";
 const Home = () => {
   return (
     <div>
-      {/* <CreatePost /> */}
+      <CreatePost />
       <hr style={{width: '59%', margin: 'auto', marginTop: '6vh'}} />
       {userPosts.map((post) => (
         <Post userName={post.userName}
