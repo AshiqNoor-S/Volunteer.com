@@ -2,8 +2,10 @@ import React from "react";
 import CreatePost from "../components/CreatePost";
 import userPosts from "../data/userPosts";
 import Post from "../components/Post";
+import { useSelector } from "react-redux";
 
 const Home = () => {
+  const { _id, picturePath } = useSelector((state) => state.user);
   return (
     <div>
       <CreatePost />

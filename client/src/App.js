@@ -19,13 +19,12 @@ function App() {
       <ThemeProvider theme={Theme}>
         <GlobalStyle />
         <BrowserRouter>
-          <Header />
+          {<Header />}
           <Routes>
             <Route path="/" element={<LoginPage />} />
             <Route
               path="/home"
-              // element={isAuth ? <Home /> : <Navigate to="/" />}
-              element={<Home />}
+              element={isAuth ? <Home /> : <Navigate to="/" />}
             />
             <Route path="/myprofile" element={<MyProfile />} />
           </Routes>
