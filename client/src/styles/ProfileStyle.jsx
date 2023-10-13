@@ -57,7 +57,6 @@ export const ProfileStyle = styled.div`
 	.about-me-heading, .my-posts-heading {
 		font-size: 2rem;
 		font-weight: 600;
-
 	}
 
 	.my-posts {
@@ -69,6 +68,104 @@ export const ProfileStyle = styled.div`
 		width: 8vw;
 		// border: 1px solid black;
 		border-radius: 10px;
+	}
+
+	@media (max-width: ${({ theme }) => theme.media.tab}) {
+		margin: 3vh 8vw;
+		
+		.heading-text {
+			bottom: 25vh;
+			right: 0vw;
+		}
+	
+		.user-name {
+			bottom: 0vh;
+			left: 0vw;
+			font-size: 2.5rem;
+		}
+	
+		.profession-tag {
+			left: 70vw;
+			font-size: 1.5rem;
+			padding: 7px;
+		}
+
+		.about-me {
+			margin-top: -24vh;
+		}
+
+		.about-me-text {
+			font-size: 1.5rem;
+			line-height: 2.5rem;
+		}
+	
+		.about-me-heading, .my-posts-heading {
+			font-size: 2.5rem;
+			font-weight: 600;
+		}
+
+		.postBanner {
+			margin: 2vh 2vw;
+			width: 40vw;
+			border-radius: 10px;
+			border: 1px solid black;
+			position: relative;
+			left: 18vw;
+		}
+	}
+
+	@media (max-width: ${({ theme }) => theme.media.mobile}) {
+	
+		margin: 3vh 8vw;
+
+		.profile-pic {
+			width: 25vw;
+		}
+
+		.banner {
+			border-radius: 10px;
+			height: 12vh;
+		}
+		
+		.heading-text {
+			bottom: 20vh;
+			right: 0vw;
+
+		}
+	
+		.user-name {
+			bottom: 0vh;
+			left: 0vw;
+			font-size: 2.2rem;
+		}
+	
+		.profession-tag {
+			left: 63vw;
+			font-size: 1.5rem;
+			padding: 7px;
+		}
+
+		.about-me {
+			margin-top: -18vh;
+		}
+
+		.about-me-text {
+			font-size: 1.5rem;
+		}
+	
+		.about-me-heading, .my-posts-heading {
+			font-size: 2.2rem;
+			font-weight: 600;
+		}
+
+		.postBanner {
+			margin: 2vh 2vw;
+			width: 60%;
+			border-radius: 10px;
+			border: 1px solid black;
+			position: relative;
+			left: 15vw;
+		}
 	}
 
 `;

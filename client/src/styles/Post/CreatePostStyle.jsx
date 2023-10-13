@@ -83,4 +83,13 @@ export const CreatePostStyle = styled.div`
 			position: relative;
 			left: 14vw;
 		}
+
+
+        @media (max-width: ${({ theme }) => theme.media.tab}) {
+		
+	}
+
+	@media (max-width: ${({ theme }) => theme.media.mobile}) {
+
+	}
 `;
