@@ -126,6 +126,13 @@ export const FooterStyle = styled.section`
 
     footer {
       padding: 3rem 0 3rem 0;
+      align-items: center;
+      text-align: center;
+    }
+
+    .quick-link-list {
+      display: flex;
+      justify-content: space-evenly;
     }
 
     .footer-bottom--section {
