@@ -10,6 +10,7 @@ import Home from "./pages/Home";
 import MyProfile from "./pages/MyProfile";
 import LoginPage from "./pages/LoginPage";
 import Footer from "./components/Footer";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   const isAuth = Boolean(useSelector((state) => state.token));
@@ -28,6 +29,7 @@ function App() {
             />
             <Route path="/myprofile" element={<MyProfile />} />
           </Routes>
+          <ScrollToTop />
           <Footer />
         </BrowserRouter>
       </ThemeProvider>

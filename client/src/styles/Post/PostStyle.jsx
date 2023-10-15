@@ -1,23 +1,6 @@
 import styled from "styled-components";
 
 export const PostStyle = styled.div`
-  /* padding: 0 4.8rem;
-  height: 100rem;
-  background-color: ${({ theme }) => theme.colors.bg};
-  display: flex;
-  justify-content: space-between;
-  align-items: center; */
-
-  /* .logo {
-    height: auto;
-    max-width: 30%;
-  } */
-
-  /* @media (max-width: ${({ theme }) => theme.media.tab}) {
-    .logo {
-      max-width: 45%;
-    }
-  } */
 
   margin: auto;
   margin-top: 6vh;
@@ -26,7 +9,6 @@ export const PostStyle = styled.div`
   padding: 4vh 4vw;
   border-radius: 20px;
   background-color: #bc6ff1;
-  /* background-color: ${({ theme }) => theme.colors.bg}; */
   color: #fff !important;
 
   .postUserImage {
@@ -34,7 +16,6 @@ export const PostStyle = styled.div`
   }
 
   .postHeaderContent {
-    /* padding-top: 2px; */
     position: relative;
     left: 2vw;
     top: 0.5vh;
@@ -81,15 +62,15 @@ export const PostStyle = styled.div`
     border: 1px solid black;
   }
 
+  .media-img {
+    width: 15vw;
+  }
+
   .commentSection {
     /* border: 1px solid black; */
     width: 90%;
     margin: auto;
     margin-top: 5vh;
-  }
-
-  .userComment {
-    /* margin-top: 3vh; */
   }
 
   .commentSection input {
@@ -98,10 +79,11 @@ export const PostStyle = styled.div`
     border-radius: 20px;
     padding: 15px;
     font-size: 1.5rem;
+    width: 100%;
   }
 
   ::placeholder {
-  color: #bc6ff1;/
+  color: #bc6ff1;
   font-weight: 900;
   /* opacity: 1; */
 }
@@ -112,6 +94,7 @@ export const PostStyle = styled.div`
 
   .commentUserImg {
     float: left;
+    width: 50px;
   }
 
   .commentBox {
@@ -141,5 +124,104 @@ export const PostStyle = styled.div`
   .commentContent {
     margin-top: 3vh;
   }
+
+  @media (max-width: ${({ theme }) => theme.media.tab}) {
+		width: 80%;
+
+    .postUserImage {
+    float: left;
+    position: relative;
+    left: 2vw;
+  }
+
+  .postHeaderContent {
+    position: relative;
+    left: 5vw;
+    top: 1vh;
+  }
+
+  .postContent {
+    width: 80%;
+  }
+
+  .postMediaSection {
+    width: 90%;
+    flex-direction: column;
+    padding: 3vh 3vw;
+  }
+
+
+  .media-img {
+    width: 100%;
+  }
+  
+  .commentSection input {
+    border-radius: 15px;
+    padding: 10px;
+    width: 80%;
+  }
+
+  .commentUserImg {
+    float: left;
+    width: 50px;
+  }
+
+  .commentBox {
+    width: 85%;
+    border-radius: 15px;
+    left: 6vw;
+    padding: 1.5vh 3vw;
+  }
+	}
+
+	@media (max-width: ${({ theme }) => theme.media.mobile}) {
+    width: 80%;
+
+    .postUserImage {
+    float: left;
+    position: relative;
+    left: 2vw;
+  }
+
+  .postHeaderContent {
+    position: relative;
+    left: 5vw;
+    top: 1vh;
+  }
+
+  .postContent {
+    width: 80%;
+  }
+
+  .postMediaSection {
+    width: 90%;
+    flex-direction: column;
+    padding: 3vh 3vw;
+  }
+
+
+  .media-img {
+    width: 100%;
+  }
+
+  .commentSection input {
+    border-radius: 15px;
+    padding: 10px;
+    width: 80%;
+  }
+
+  .commentUserImg {
+    float: left;
+    width: 30px;
+  }
+
+  .commentBox {
+    width: 85%;
+    border-radius: 15px;
+    left: 10vw;
+    padding: 1.5vh 5vw;
+  }
+
+}
 
 `;

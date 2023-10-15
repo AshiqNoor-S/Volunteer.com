@@ -2,17 +2,16 @@ import styled from "styled-components";
 
 export const CreatePostStyle = styled.div`
 	margin: auto;
-  margin-top: 6vh;
-  margin-bottom: 6vh;
-  width: 50%;
-  padding: 4vh 1vw;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 20px;
-  background-color: #bc6ff1;
-  /* background-color: ${({ theme }) => theme.colors.bg}; */
-  color: #fff !important;
+    margin-top: 6vh;
+    margin-bottom: 6vh;
+    width: 50%;
+    padding: 4vh 1vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    background-color: #bc6ff1;
+    color: #fff !important;
 
 .createPost {
 	width: 90%;
@@ -83,4 +82,35 @@ export const CreatePostStyle = styled.div`
 			position: relative;
 			left: 14vw;
 		}
+
+
+    @media (max-width: ${({ theme }) => theme.media.tab}) {
+		width: 80%;
+
+        
+
+		.post-icon {
+			position: relative;
+			left: 20vw;
+            margin-top: 0vh;
+		}
+	}
+
+	@media (max-width: ${({ theme }) => theme.media.mobile}) {
+        width: 80%;
+
+        .upload-button {
+			width: 100%;
+		}
+
+        .containerss span{
+			display: block;
+		}
+
+		.post-icon {
+			position: relative;
+			left: 40vw;
+            margin-top: 2vh;
+		}
+	}
 `;

@@ -30,7 +30,7 @@ const Footer = () => {
             </div>
             <div className="footer-subscribe">
               <h3>Quick Links</h3>
-              <ul>
+              <ul className="quick-link-list">
                 <li className="links-element">
                   <BsDot className="icons" />
                   <p>Home</p>
