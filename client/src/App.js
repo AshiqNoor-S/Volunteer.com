@@ -10,6 +10,7 @@ import Home from "./pages/Home";
 import MyProfile from "./pages/MyProfile";
 import LoginPage from "./pages/LoginPage";
 import Footer from "./components/Footer";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   const isAuth = Boolean(useSelector((state) => state.token));
@@ -22,9 +23,13 @@ function App() {
           {<Header />}
           <Routes>
             <Route path="/" element={<LoginPage />} />
-            <Route path="/home" element={isAuth ? <Home /> : <Navigate to="/" />} />
+            <Route
+              path="/home"
+              element={isAuth ? <Home /> : <Navigate to="/" />}
+            />
             <Route path="/myprofile" element={<MyProfile />} />
           </Routes>
+          <ScrollToTop />
           <Footer />
         </BrowserRouter>
       </ThemeProvider>
