@@ -1,171 +1,174 @@
 import styled from "styled-components";
 
 export const ProfileStyle = styled.div`
+  margin: 5vh 8vw;
+  padding: 2vh 1vw;
+  // border: 1px solid black;
+  border-radius: 20px;
 
-	margin: 5vh 8vw;
-	padding: 2vh 1vw;
-	// border: 1px solid black;
-	border-radius: 20px;
+  .profile-banner-imgs {
+    height: 40vh;
+    // border: 1px solid black;
+  }
 
-	.profile-banner-imgs {
-		height: 40vh;
-		// border: 1px solid black;
-	}
+  .banner {
+    border-radius: 10px;
+  }
 
-	.banner {
-		border-radius: 10px;
-	}
+  .profile-pic {
+    position: relative;
+    bottom: 6vh;
+    left: 4vw;
+    border: 3px solid #fff;
+    border-radius: 50%;
+  }
 
-	.profile-pic {
-		position: relative;
-		bottom: 6vh;
-		left: 4vw;
-		border: 2px solid #fff;
-		border-radius: 50%;
-	}
+  .heading-text {
+    position: relative;
+    bottom: 9vh;
+    right: 3vw;
+    width: 30%;
+  }
 
-	.heading-text {
-		position: relative;
-		bottom: 9vh;
-		right: 3vw;
-		width: 30%;
-	}
+  .user-name {
+    font-size: 2.1rem;
+    font-weight: 600;
+    position: relative;
+    bottom: -1vh;
+    left: 15vw;
+  }
 
-	.user-name {
-		font-size: 2rem;
-		font-weight: 600;
-		position: relative;
-		bottom: 0vh;
-		left: 15vw;
-	}
+  .profession-tag {
+    font-size: 1.1rem;
+    position: relative;
+    bottom: -2vh;
+    left: 15vw;
+    background-color: #6254f3;
+    color: white;
+    padding: 0.5vh 1vw;
+    border-radius: 10px;
+  }
 
-	.profession-tag {
-		position: relative;
-		bottom: 2.5vh;
-		left: 24vw;
-		background-color: #bc6ff1;
-		padding: 0.5vh 1vw;
-		border-radius: 10px;
-	}
+  .about-me {
+    // border: 1px solid black;
+    position: relative;
+    margin-top: -6vh;
+  }
 
-	.about-me {
-		// border: 1px solid black;
-		position: relative;
-		margin-top: -6vh;
-	}
+  .about-me-heading,
+  .my-posts-heading {
+    font-size: 2rem;
+    font-weight: 600;
+  }
 
-	.about-me-heading, .my-posts-heading {
-		font-size: 2rem;
-		font-weight: 600;
-	}
+  .my-posts {
+    margin: 2vh 0;
+  }
 
-	.my-posts {
-		margin: 2vh 0;
-	}
+  .postBanner {
+    margin: 2vh 2vw;
+    width: 8vw;
+    // border: 1px solid black;
+    border-radius: 10px;
+  }
 
-	.postBanner {
-		margin: 2vh 2vw;
-		width: 8vw;
-		// border: 1px solid black;
-		border-radius: 10px;
-	}
+  @media (max-width: ${({ theme }) => theme.media.tab}) {
+    margin: 3vh 8vw;
 
-	@media (max-width: ${({ theme }) => theme.media.tab}) {
-		margin: 3vh 8vw;
-		
-		.heading-text {
-			bottom: 25vh;
-			right: 0vw;
-		}
-	
-		.user-name {
-			bottom: 0vh;
-			left: 0vw;
-			font-size: 2.5rem;
-		}
-	
-		.profession-tag {
-			left: 70vw;
-			font-size: 1.5rem;
-			padding: 7px;
-		}
+    .heading-text {
+      bottom: 25vh;
+      right: 0vw;
+    }
 
-		.about-me {
-			margin-top: -24vh;
-		}
+    .user-name {
+      bottom: 0vh;
+      left: 0vw;
+      font-size: 2.5rem;
+    }
 
-		.about-me-text {
-			font-size: 1.5rem;
-			line-height: 2.5rem;
-		}
-	
-		.about-me-heading, .my-posts-heading {
-			font-size: 2.5rem;
-			font-weight: 600;
-		}
+    .profession-tag {
+      bottom: 2vh;
+      left: 70vw;
+      font-size: 1.5rem;
+      padding: 7px;
+    }
 
-		.postBanner {
-			margin: 2vh 2vw;
-			width: 40vw;
-			border-radius: 10px;
-			border: 1px solid black;
-			position: relative;
-			left: 18vw;
-		}
-	}
+    .about-me {
+      margin-top: -24vh;
+    }
 
-	@media (max-width: ${({ theme }) => theme.media.mobile}) {
-	
-		margin: 3vh 8vw;
+    .about-me-text {
+      font-size: 1.5rem;
+      line-height: 2.5rem;
+    }
 
-		.profile-pic {
-			width: 25vw;
-		}
+    .about-me-heading,
+    .my-posts-heading {
+      font-size: 2.5rem;
+      font-weight: 600;
+    }
 
-		.banner {
-			border-radius: 10px;
-			height: 12vh;
-		}
-		
-		.heading-text {
-			bottom: 20vh;
-			right: 0vw;
+    .postBanner {
+      margin: 2vh 2vw;
+      width: 40vw;
+      border-radius: 10px;
+      border: 1px solid black;
+      position: relative;
+      left: 18vw;
+    }
+  }
 
-		}
-	
-		.user-name {
-			bottom: 0vh;
-			left: 0vw;
-			font-size: 2.2rem;
-		}
-	
-		.profession-tag {
-			left: 63vw;
-			font-size: 1.5rem;
-			padding: 7px;
-		}
+  @media (max-width: ${({ theme }) => theme.media.mobile}) {
+    margin: 3vh 8vw;
 
-		.about-me {
-			margin-top: -18vh;
-		}
+    .profile-pic {
+      width: 25vw;
+    }
 
-		.about-me-text {
-			font-size: 1.5rem;
-		}
-	
-		.about-me-heading, .my-posts-heading {
-			font-size: 2.2rem;
-			font-weight: 600;
-		}
+    .banner {
+      border-radius: 10px;
+      height: 12vh;
+    }
 
-		.postBanner {
-			margin: 2vh 2vw;
-			width: 60%;
-			border-radius: 10px;
-			border: 1px solid black;
-			position: relative;
-			left: 15vw;
-		}
-	}
+    .heading-text {
+      bottom: 20vh;
+      right: 0vw;
+    }
 
+    .user-name {
+      bottom: 0vh;
+      left: 0vw;
+      font-size: 2.2rem;
+    }
+
+    .profession-tag {
+      bottom: 3.5vh;
+      left: 63vw;
+      font-size: 1.5rem;
+      padding: 7px;
+    }
+
+    .about-me {
+      margin-top: -20vh;
+    }
+
+    .about-me-text {
+      font-size: 1.5rem;
+    }
+
+    .about-me-heading,
+    .my-posts-heading {
+      font-size: 2.2rem;
+      font-weight: 600;
+    }
+
+    .postBanner {
+      margin: 2vh 2vw;
+      width: 60%;
+      border-radius: 10px;
+      border: 1px solid black;
+      position: relative;
+      left: 15vw;
+    }
+  }
 `;
