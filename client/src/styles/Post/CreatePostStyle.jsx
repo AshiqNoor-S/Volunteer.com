@@ -78,10 +78,35 @@ export const CreatePostStyle = styled.div`
 			display:inline-block;
 		}
 
+		.custom-file-input {
+            display: none;
+        }
+
+        .custom-file-label {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
 		.post-icon {
 			position: relative;
 			left: 14vw;
 		}
+
+        .submit-icon {
+            background-image: url("./images/post_icon.png"); /* Change url to wanted image */
+            background-size: cover;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            color: transparent;
+            position: relative;
+			left: 14vw;
+        }
 
 
     @media (max-width: ${({ theme }) => theme.media.tab}) {
