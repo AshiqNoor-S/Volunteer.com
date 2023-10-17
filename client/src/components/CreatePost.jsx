@@ -103,7 +103,7 @@ const CreatePost = (props) => {
 	return (
 		<CreatePostStyle>
 			<section className='createPost'>
-				<img src='./images/user_icon.png' className="profile-icon" style={{ width: '50px' }} />
+				<img src='./images/user_icon.png' className="profile-icon" style={{ width: '50px' }} alt='user-profile-icon' />
 				{/* <form action="/create-post" method="POST" enctype="multipart/form-data"> */}
 				<form onSubmit={handleSubmit} >
 					<div className="form-container">
@@ -112,7 +112,7 @@ const CreatePost = (props) => {
 						<div className="containerss">
 							{/* <span><button className="upload-button inline-buttons">Upload Photos/Videos</button></span> */}
 
-							<input type="text" id="location" name="location" value={location} onChange={handleLocationChange} placeholder='Location' />
+							<input type="text" id="location" name="location" value={location} onChange={handleLocationChange} placeholder='Location' required />
 
 							<input type="file" className="custom-file-input" id="file" name="file" accept="image/*, video/*" onChange={handleFileChange} />
 							<label className="custom-file-label upload-button inline-buttons" for="file">Upload Photos/Videos</label>

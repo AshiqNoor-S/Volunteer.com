@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector } from "react-redux";
 import axios from 'axios';
 import CreatePost from "../components/CreatePost";
-// import userPosts from "../data/userPosts";
 import Location from "./Location";
 import Post from "../components/Post";
-import { useSelector } from "react-redux";
 
 const Home = () => {
   const { _id, picturePath } = useSelector((state) => state.user);
@@ -12,8 +11,9 @@ const Home = () => {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    axios.get('/posts')
+    axios.get('http://localhost:3001/api/posts')
       .then((response) => {
+        // console.log(`axios: ${JSON.stringify(response.data[0])}`);
         setPosts(response.data);
       })
       .catch((error) => {
@@ -25,25 +25,17 @@ const Home = () => {
     <div>
       <CreatePost />
       <hr style={{ width: '59%', margin: 'auto', marginTop: '6vh' }} />
-      {/* {userPosts.map((post) => (
-        <Post userName={post.userName}
-          userTitle={post.userTitle}
-          userPhotoURL={post.userPhotoURL}
-          postTime={post.postTime}
-          postContent={post.postContent}
-          postMediaURLs={post.postMediaURLs}
-          postComments={post.postComments} />
-      ))} */}
 
       {posts.map((post) => (
-        <Post key={post._id} userName={post.userName}
+        <Post key={post._id} postId={post._id} userName={post.userName}
           userTitle={post.userTitle}
           userPhotoURL={post.userPhotoURL}
           postTime={post.postTime}
           postContent={post.postContent}
-          postMediaURLs={post.file}
-          postComments={post.postComments} />
+          postFile={post.file}
+          postComments={post.postComments} loggedInUser={_id} />
       ))}
+
     </div>
   );
 };

@@ -35,20 +35,6 @@ const postSchema = new mongoose.Schema({
 	{ timestamps: true }
 );
 
-// const postSchema = new mongoose.Schema({
-// 	id: {
-// 		type: String, 
-// 		required: true,
-// 	},
-// 	postContent: {
-// 		type: String, 
-// 		required:true,
-// 	}, 
-// 	file: String
-// },
-// 	{ timestamps: true }
-// );
-
 const Post = mongoose.model("Post", postSchema);
 
 export default Post;

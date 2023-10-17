@@ -10,8 +10,9 @@ const MyProfile = () => {
           src="./images/profile_banner4.4.png"
           className="banner"
           style={{ width: "100%" }}
+          alt="profile-banner"
         />
-        <img src="./images/user_icon3.png" className="profile-pic" />
+        <img src="./images/user_icon3.png" className="profile-pic" alt="profile-pic" />
       </div>
       <div className="heading-text">
         <h1 className="user-name">My Profile</h1>
@@ -36,7 +37,7 @@ const MyProfile = () => {
         <h1 className="my-posts-heading">My Posts</h1>
         {myProfilePosts.map((post) => (
           <a href={post.postURL}>
-            <img src={post.imgURL} className="postBanner" />
+            <img src={post.imgURL} className="postBanner" alt="profile-post" />
           </a>
         ))}
       </div>
