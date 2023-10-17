@@ -48,19 +48,22 @@ const Footer = () => {
               <h3>Developer Team</h3>
               <a
                 href="https://www.linkedin.com/in/ashiq-noor-sudheer/"
-                target="_blank"
+                target="_blank" 
+                rel="noopener noreferrer"
               >
                 Ashiq Noor Sudheer
               </a>
               <a
                 href="https://www.linkedin.com/in/priyanshu-pattanaik/"
-                target="_blank"
+                target="_blank" 
+                rel="noopener noreferrer"
               >
                 Priyanshu Pattanaik
               </a>
               <a
                 href="https://www.linkedin.com/in/vishal-kumar-yadav-8085a3232/"
-                target="_blank"
+                target="_blank" 
+                rel="noopener noreferrer"
               >
                 Vishal Kumar Yadav
               </a>

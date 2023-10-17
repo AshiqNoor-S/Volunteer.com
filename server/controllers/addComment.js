@@ -13,6 +13,7 @@ export const addComment = async (req, res) => {
 
     try {
         const post = await Post.findById(postId);
+		// console.log('Found Post');
 
         if (!post) {
             return res.status(404).json({ error: 'Post not found' });
@@ -27,6 +28,8 @@ export const addComment = async (req, res) => {
         };
 
         post.postComments.push(newComment);
+
+		// console.log('Added comment to the post!');
 
         await post.save();
 

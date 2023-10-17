@@ -27,13 +27,13 @@ const Home = () => {
       <hr style={{ width: '59%', margin: 'auto', marginTop: '6vh' }} />
 
       {posts.map((post) => (
-        <Post key={post._id} userId={post._id} userName={post.userName}
+        <Post key={post._id} postId={post._id} userName={post.userName}
           userTitle={post.userTitle}
           userPhotoURL={post.userPhotoURL}
           postTime={post.postTime}
           postContent={post.postContent}
           postFile={post.file}
-          postComments={post.postComments} />
+          postComments={post.postComments} loggedInUser={_id} />
       ))}
 
     </div>
