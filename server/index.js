@@ -14,6 +14,9 @@ import { verifyToken } from './middleware/auth.js';
 import Post from './models/Post.js';
 import { posts } from "./controllers/posts.js";
 
+import { getUserProfile } from './controllers/getUserProfile.js';
+import { addComment } from './controllers/addComment.js';
+
 /* CONFIGURATIONS */
 const __filename = fileURLToPath(import.meta.url);  /*These both configs are used because we set the type as module in package.json*/
 const __dirname = path.dirname(__filename);
@@ -46,13 +49,18 @@ app.post("/auth/register", upload.single("picture"), register);
 
 app.post('/create-post', upload.single('file'), posts);
 
-app.get('/posts', async (req, res) => {
+app.get('/api/posts', async (req, res) => {
     const posts = await Post.find();
+    // console.log("GET /posts");
     res.json(posts);
 });
 
 /* ROUTES */
 app.use("/auth", authRoutes);
+
+app.get('/get-user-profile', getUserProfile);
+
+app.post('/add-comment/:postId', addComment);
 
 /* MONGOOSE SETUP */
 const PORT = process.env.PORT || 6001;
