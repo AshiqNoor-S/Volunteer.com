@@ -6,7 +6,9 @@ const CreatePost = (props) => {
 	const [postContent, setPostContent] = useState('');
 	const [data, setData] = useState(null);
 	const [file, setFile] = useState(null);
+	const [organisations, setOrganisation] = useState(null);
 	const [location, setLocation] = useState('');
+	const [mergedData, setMergedData] = useState([]);
 
 	const fetchData = async () => {
 		try {
@@ -28,14 +30,15 @@ const CreatePost = (props) => {
 		  const BOUNDING_BOX_FORMAT = `rect:${minLongitude},${minLatitude},${maxLongitude},${maxLatitude}`;
 		  const response = await fetch("https://api.geoapify.com/v2/places?categories="+GOVERNMENT_CATEGORY+","+NGO_CATEGORY+"&filter="+BOUNDING_BOX_FORMAT+"&limit=20&apiKey=303f4720094a4172a8ab37549d279277");
 		  const result = await response.json();
-		  setData(result);
+		  const addressLine1Array = result.features.map(feature => feature.properties.address_line1);
+		  console.log('Address Line 1 Array:', addressLine1Array);
+		  setData(result.features);  // Set the entire features array if needed
+		  mergeAndFilterData(organisations);
+		  console.log(mergedData);
 		} catch (error) {
 		  console.error('Error fetching data:', error);
 		}
 	};
-
-
-
 
 	const handlePostContentChange = (e) => {
 		setPostContent(e.target.value);
@@ -64,12 +67,25 @@ const CreatePost = (props) => {
 			const postLocations = locationData
 			.filter(item => item.userName) // Filter out items without postLocation
 			.map(item => item.userName); // Map to extract postLocation
-
-			console.log(postLocations);
+			setOrganisation(postLocations);
 		} catch (error) {
 			console.error(error);
 		}
 	}
+
+	
+
+	const mergeAndFilterData = (postLocations) => {
+	  if (data && postLocations) {
+		// Merge the data from postLocations and data
+		const mergedData = [...postLocations, ...data.features.map(feature => feature.properties.name)];
+		// Filter out duplicates
+		const filteredData = mergedData.filter((item, index) => mergedData.indexOf(item) === index);
+		// Store the filtered data in state
+		setMergedData(filteredData);
+	  }
+	};
+  
 
 	const handleSubmit = async (e) => {
 		fetchData();
