@@ -4,9 +4,12 @@ import { NavLink } from "react-router-dom";
 import { CgMenu, CgCloseR } from "react-icons/cg";
 import { NavStyle } from "../styles/NavStyle";
 import { ButtonStyle } from "../styles/ButtonStyle";
+import {useDispatch} from "react-redux";
+import {setLogout} from "../state";
 
 const Navbar = () => {
   const [openMenu, setOpenMenu] = useState(false);
+  const dispatch = useDispatch();
 
   return (
     <NavStyle>
@@ -31,7 +34,7 @@ const Navbar = () => {
             </NavLink>
           </li>
           <li>
-            <ButtonStyle>Logout</ButtonStyle>
+            <ButtonStyle onClick={() => dispatch(setLogout())}>Logout</ButtonStyle>
           </li>
         </ul>
         {/* //nav icon */}

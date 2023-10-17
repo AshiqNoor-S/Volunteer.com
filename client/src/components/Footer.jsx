@@ -8,7 +8,11 @@ import ShowPolicy from "../popUpsData/ShowPolicy";
 import ShowTermsCondition from "../popUpsData/ShowTermsCondition";
 import ShowReport from "../popUpsData/ShowReport";
 
+import {useDispatch} from "react-redux";
+import {setLogout} from "../state";
+
 const Footer = () => {
+  const dispatch = useDispatch();
   const [showPolicy, setShowPolicy] = useState(false);
   const [showTermCondition, setShowTermCondition] = useState(false);
   const [showReport, setShowReport] = useState(false);
@@ -40,7 +44,7 @@ const Footer = () => {
                   <p>My Profile</p>
                 </li>
                 <li className="links-element">
-                  <button className="logout-btn"> Logout </button>
+                  <button className="logout-btn" onClick={() => dispatch(setLogout())}> Logout </button>
                 </li>
               </ul>
             </div>
