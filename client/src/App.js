@@ -11,6 +11,7 @@ import MyProfile from "./pages/MyProfile";
 import LoginPage from "./pages/LoginPage";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
+import Location from "./pages/Location";
 
 function App() {
   const isAuth = Boolean(useSelector((state) => state.token));

@@ -1,12 +1,41 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { CreatePostStyle } from "../styles/Post/CreatePostStyle";
 import { useSelector } from 'react-redux';
 
 const CreatePost = (props) => {
-
 	const [postContent, setPostContent] = useState('');
+	const [data, setData] = useState(null);
 	const [file, setFile] = useState(null);
 	const [location, setLocation] = useState('');
+
+	const fetchData = async () => {
+		try {
+		  const NGO_CATEGORY = 'healthcare';
+		  console.log(location);
+		  const GOVERNMENT_CATEGORY = 'office.government';
+		  const place = await fetch("https://api.geoapify.com/v1/geocode/search?text="+location+"&apiKey=303f4720094a4172a8ab37549d279277");
+		  const latlong = await place.json();
+		  const latitude = latlong.features[0].geometry.coordinates[1];
+		  const longitude = latlong.features[0].geometry.coordinates[0];
+		  const radiusInKilometers = 80;
+		  const earthRadius = 6371; 
+		  const angularRadius = radiusInKilometers / earthRadius;
+
+		  const minLatitude = latitude - angularRadius * (180 / Math.PI);
+		  const minLongitude = longitude - angularRadius * (180 / Math.PI) / Math.cos(latitude * Math.PI / 180);
+		  const maxLatitude = latitude + angularRadius * (180 / Math.PI);
+		  const maxLongitude = longitude + angularRadius * (180 / Math.PI) / Math.cos(latitude * Math.PI / 180);
+		  const BOUNDING_BOX_FORMAT = `rect:${minLongitude},${minLatitude},${maxLongitude},${maxLatitude}`;
+		  const response = await fetch("https://api.geoapify.com/v2/places?categories="+GOVERNMENT_CATEGORY+","+NGO_CATEGORY+"&filter="+BOUNDING_BOX_FORMAT+"&limit=20&apiKey=303f4720094a4172a8ab37549d279277");
+		  const result = await response.json();
+		  setData(result);
+		} catch (error) {
+		  console.error('Error fetching data:', error);
+		}
+	};
+
+
+
 
 	const handlePostContentChange = (e) => {
 		setPostContent(e.target.value);
@@ -20,12 +49,30 @@ const CreatePost = (props) => {
 		setLocation(e.target.value);
 	};
 
+
 	const id = String((Math.random() * 100000000000000));
 	const { firstName } = useSelector((state) => state.user);
 
 	// console.log(`User from useSelector() = ${user}`);
 
+	const getLocation = async () => {
+		try {
+			const response = await fetch('http://localhost:3001/posts/getlocation', {
+				method: 'GET',
+			});
+			const locationData= await response.json();
+			const postLocations = locationData
+			.filter(item => item.userName) // Filter out items without postLocation
+			.map(item => item.userName); // Map to extract postLocation
+
+			console.log(postLocations);
+		} catch (error) {
+			console.error(error);
+		}
+	}
+
 	const handleSubmit = async (e) => {
+		fetchData();
 		e.preventDefault();
 		console.log('handleSubmit called 2');
 		const formData = new FormData();
@@ -49,6 +96,8 @@ const CreatePost = (props) => {
 		} catch (error) {
 			console.error(error);
 		}
+		getLocation();
+
 	};
 
 	return (
@@ -73,6 +122,18 @@ const CreatePost = (props) => {
 						</div>
 					</div>
 				</form>
+				{/* <div>
+					<h1>NGOs and Government organisation nearby</h1>
+					{data ? (
+						<ul>
+						{data.features.map((feature, index) => (
+							<li key={index}>{feature.properties.name}</li>
+						))}
+						</ul>
+					) : (
+						<p>Loading data...</p>
+					)}
+				</div> */}
 			</section>
 
 		</CreatePostStyle>

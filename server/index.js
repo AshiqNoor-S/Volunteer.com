@@ -10,6 +10,7 @@ import multer from 'multer';
 import authRoutes from "./routes/auth.js";
 import { register } from "./controllers/auth.js";
 import { verifyToken } from './middleware/auth.js';
+import postRoute from './routes/posts.js';
 
 import Post from './models/Post.js';
 import { posts } from "./controllers/posts.js";
@@ -41,6 +42,8 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
+
+
 /* ROUTES WITH FILES*/
 app.post("/auth/register", upload.single("picture"), register);
 
@@ -53,6 +56,7 @@ app.get('/posts', async (req, res) => {
 
 /* ROUTES */
 app.use("/auth", authRoutes);
+app.use("/posts",postRoute);
 
 /* MONGOOSE SETUP */
 const PORT = process.env.PORT || 6001;
