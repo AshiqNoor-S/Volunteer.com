@@ -1,11 +1,12 @@
 import React from 'react';
 import { PostStyle } from "../styles/Post/PostStyle";
+import AddCommentForm from './AddCommentForm';
 
 const Post = (props) => {
 	return (
 		<PostStyle>
 			<section className='postHeader'>
-				<img src='./images/user_icon.png' className='postUserImage' style={{ width: '58px' }} />
+				<img src={props.userPhotoURL} className='postUserImage' style={{ width: '58px' }} />
 				<div className='postHeaderContent'>
 					<p><b>{props.userName}</b></p>
 					<p><b>{props.userTitle}</b></p>
@@ -17,27 +18,24 @@ const Post = (props) => {
 					{props.postContent}
 				</p>
 				<div className='postMediaSection'>
-					{props.postMediaURLs.map((media) => (
+					<img src={props.postFile} className='media-img' />
+					{/* {props.postFile.map((media) => (
 						<div>
 							<img src={media} className='media-img' />
 						</div>
-					))}
+					))} */}
 				</div>
 				<hr style={{ width: '90%', margin: 'auto', marginTop: '5vh', color: '#fff', height: '2px' }} />
 			</section>
 			<section className='commentSection'>
-				<div className='userComment'>
-					<button style={{ background: 'none', border: 'none' }}><img src='./images/upvote_icon.png' style={{ width: '40px' }} /></button>
-					<input type='text' name='comment' placeholder='Comment here...' />
-					<button type='submit'></button>
-				</div>
+				<AddCommentForm postId={props.userId} />
 				{props.postComments.map((comment) => (
 					<div className='comment'>
 						<img src={comment.commentUserPhotoURL} className='commentUserImg' />
 						<div className='commentBox'>
 							<p><b>{comment.commentUserName}</b>
 								<span className='commentTime'>&bull; {comment.commentTime}</span></p>
-							<p style={{opacity: '0.7'}} >{comment.commentUserTitle}</p>
+							<p style={{ opacity: '0.7' }} >{comment.commentUserTitle}</p>
 							<div className='commentContent' ><p>{comment.commentContent}</p></div>
 						</div>
 					</div>
