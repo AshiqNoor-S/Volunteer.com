@@ -10,6 +10,7 @@ const CreatePost = (props) => {
 	const [data, setData] = useState(null);
 	const [file, setFile] = useState(null);
 	const [organisations, setOrganisation] = useState(null);
+	const [emails, setEmail] = useState(null);
 	const [location, setLocation] = useState('');
 	const [mergedData, setMergedData] = useState([]);
 
@@ -59,8 +60,6 @@ const CreatePost = (props) => {
 	const id = String((Math.random() * 100000000000000));
 	const { firstName } = useSelector((state) => state.user);
 
-	// console.log(`User from useSelector() = ${user}`);
-
 	const getLocation = async () => {
 		try {
 			const response = await fetch('http://localhost:3001/posts/getlocation', {
@@ -70,29 +69,50 @@ const CreatePost = (props) => {
 			const postLocations = locationData
 				.filter(item => item.userName) // Filter out items without postLocation
 				.map(item => item.userName); // Map to extract postLocation
-			setOrganisation(postLocations);
+
+			const postEmail = locationData
+			.filter(item => item.userEmail) // Filter out items without postLocation
+			.map(item => item.userEmail); 
+
+			console.log(postEmail);
+			
+			setOrganisation(postLocations,emails);
+			setEmail(postEmail);
 		} catch (error) {
 			console.error(error);
 		}
 	}
 
+	// const mergeAndFilterData = (postLocations) => {
+	// 	if (data && postLocations) {
+	// 		// Merge the data from postLocations and data
+	// 		const mergedData = [...postLocations, ...data.features.map(feature => feature.properties.name)];
+	// 		// Filter out duplicates
+	// 		const filteredData = mergedData.filter((item, index) => mergedData.indexOf(item) === index);
+	// 		// Store the filtered data in state
+	// 		setMergedData(filteredData);
+	// 	}
+	// };
 
-
-	const mergeAndFilterData = (postLocations) => {
+	const mergeAndFilterData = (postLocations, postEmails) => {
 		if (data && postLocations) {
-			// Merge the data from postLocations and data
-			const mergedData = [...postLocations, ...data.features.map(feature => feature.properties.name)];
-			// Filter out duplicates
-			const filteredData = mergedData.filter((item, index) => mergedData.indexOf(item) === index);
-			// Store the filtered data in state
-			setMergedData(filteredData);
+		  // Merge the data from postLocations and data
+		  const mergedData = [...postLocations, ...data.features.map(feature => feature.properties.name)];
+		  // Filter out duplicates
+		  const filteredData = mergedData.filter((item, index) => mergedData.indexOf(item) === index);
+		  // Create an array to hold objects with userName and userEmail
+		  const mergedDataWithEmails = filteredData.map(userName => ({
+			userEmail: postEmails[postLocations.indexOf(userName)] || null,
+		  }));
+		  // Store the filtered data with userEmails in state
+		  setMergedData(mergedDataWithEmails);
 		}
-	};
+	  };
 
 
 	const handleSubmit = async (e) => {
 		fetchData();
-		// e.preventDefault();
+		e.preventDefault();
 		console.log('handleSubmit called 2');
 		const formData = new FormData();
 		formData.append('id', id);
@@ -131,13 +151,10 @@ const CreatePost = (props) => {
 						</textarea>
 						<div className="containerss">
 							{/* <span><button className="upload-button inline-buttons">Upload Photos/Videos</button></span> */}
-
 							<input type="text" id="location" name="location" value={location} onChange={handleLocationChange} placeholder='Location' required />
-
 							<input type="file" className="custom-file-input" id="file" name="file" accept="image/*, video/*" onChange={handleFileChange} />
 							<label className="custom-file-label upload-button inline-buttons" for="file">Upload Photos/Videos</label>
 							{/* <a href='#'><img src='./images/post_icon.png' className="post-icon" style={{ width: '32px' }} /></a> */}
-
 							<button type="submit" className='submit-icon' ></button>
 						</div>
 					</div>

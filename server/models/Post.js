@@ -16,6 +16,7 @@ const postSchema = new mongoose.Schema({
 	id: {
 		type: String, 
 		required: true,
+		unique:true,
 	},
 	userName: String,
 	userTitle: String,
