@@ -57,7 +57,7 @@ export const ProfileStyle = styled.div`
 
   .about-me-heading,
   .my-posts-heading {
-    font-size: 2rem;
+    font-size: 2.2rem;
     font-weight: 600;
   }
 

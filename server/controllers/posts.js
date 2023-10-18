@@ -6,7 +6,7 @@ import formatDateTime from "./formatDateTime.js";
 export const posts = async (req, res) => {
 	try {
 		// Destructuring the request body
-		const { id, postContent, file, user, postLocation } = req.body;
+		const { id, postContent, file, user, postLocation, userEmail } = req.body;
 
 		// Extracting user data for User DB
 		const userRecord = await User.findOne({ firstName: user });
@@ -16,7 +16,7 @@ export const posts = async (req, res) => {
 		const postTime = formatDateTime(new Date());
 
 		// Creating a new Post document
-		const newPost = new Post({ id, userName, userTitle, userPhotoURL, postTime, postContent, file, postLocation,  });
+		const newPost = new Post({ id, userName, userTitle, userPhotoURL, userEmail, postTime, postContent, file, postLocation, upvoteCount: 0});
 
 		// Saving the new Post document in Post DB
 		const savedPost = await newPost.save();

@@ -1,7 +1,13 @@
 import React, { useState } from 'react';
 import { useSelector } from "react-redux";
+import axios from 'axios';
 
-function AddCommentForm({ postId, onCommentAdded }) {
+function AddCommentForm(props) {
+
+	const { postId, onCommentAdded, postUpvoteCount } = props;
+
+	const [upvoteCount, setUpvoteCount] = useState(postUpvoteCount);
+	const [isUpvoted, setIsUpvoted] = useState(false);
 
 	const userState = useSelector((state) => state.user);
 
@@ -17,14 +23,14 @@ function AddCommentForm({ postId, onCommentAdded }) {
 
 	const formatDateTime = (timestamp) => {
 		const options = { month: 'short', day: 'numeric', year: 'numeric' };
-	
+
 		const date = new Date(timestamp);
-	
+
 		const formattedDate = date.toLocaleDateString('en-US', options);
-		
+
 		const time = date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }).split(' ').join('');
-	
-	
+
+
 		return `${time} · ${formattedDate}`;
 	}
 
@@ -32,8 +38,21 @@ function AddCommentForm({ postId, onCommentAdded }) {
 		setCommentContent(e.target.value);
 	};
 
+	const handleUpvote = async () => {
+		if (!isUpvoted) {
+			try {
+				const response = await axios.post(`http://localhost:3001/upvote/${postId}`);
+				const { upvoteCount } = response.data;
+				setUpvoteCount(upvoteCount);
+				setIsUpvoted(true);
+			} catch (error) {
+				console.error('Error upvoting:', error);
+			}
+		}
+	}
+
 	const handleSubmit = async (e) => {
-		e.preventDefault();
+		// e.preventDefault();
 
 		try {
 			// console.log(userState);
@@ -68,13 +87,14 @@ function AddCommentForm({ postId, onCommentAdded }) {
 	};
 
 	return (
-		<form onSubmit={handleSubmit}>
-			<div className='userComment'>
-				<button style={{ background: 'none', border: 'none' }}><img src='./images/upvote_icon.png' style={{ width: '40px' }} /></button>
+
+		<div className='userComment'>
+			<button onClick={handleUpvote} disabled={isUpvoted} style={{ background: 'none', border: 'none' }}><img src='./images/upvote_icon.png' style={{ width: '40px' }} alt='upvote' /> {upvoteCount}</button>
+			<form onSubmit={handleSubmit} style={{margin: '0', padding: '0', display: 'inline'}}>
 				<input type='text' name='comment' placeholder='Comment here...' value={commentContent} onChange={handleCommentContentChange} required />
-				<button type='submit' style={{background: '#bc6ff1', padding: '0px 8px', right: '12px', position: 'relative', zIndex: '1000', borderRadius: '50%', fontWeight: '600', fontSize: '2rem'}}> + </button>
-			</div>
-		</form>
+				<button type='submit' style={{ background: '#bc6ff1', padding: '0px 8px', right: '12px', position: 'relative', zIndex: '1000', borderRadius: '50%', fontWeight: '600', fontSize: '2rem' }}> + </button>
+			</form>
+		</div>
 	);
 }
 

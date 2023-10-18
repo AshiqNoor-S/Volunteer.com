@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { PostStyle } from "../styles/Post/PostStyle";
 import AddCommentForm from './AddCommentForm';
 
@@ -36,7 +36,7 @@ const Post = (props) => {
 				<hr style={{ width: '90%', margin: 'auto', marginTop: '5vh', color: '#fff', height: '2px' }} />
 			</section>
 			<section className='commentSection'>
-				<AddCommentForm postId={props.postId} onCommentAdded={handleCommentAdded} />
+				<AddCommentForm postId={props.postId} onCommentAdded={handleCommentAdded} postUpvoteCount={props.upvoteCount} />
 				{props.postComments.map((comment) => (
 					<div className='comment' key={props.postId}>
 						<img src={comment.commentUserPhotoURL} className='commentUserImg' alt='comment-user' />

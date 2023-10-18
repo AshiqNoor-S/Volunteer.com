@@ -23,6 +23,7 @@ const postSchema = new mongoose.Schema({
 		type: String,
 		default: "",
 	},
+	userEmail: String,
 	postTime: String,
 	postContent: {
 		type: String, 
@@ -30,7 +31,8 @@ const postSchema = new mongoose.Schema({
 	}, 
 	file: String, 
 	postLocation: String,
-	postComments: [commentSchema]
+	postComments: [commentSchema], 
+	upvoteCount: Number,
 },
 	{ timestamps: true }
 );

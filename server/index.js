@@ -15,6 +15,8 @@ import postRoute from './routes/posts.js';
 import Post from './models/Post.js';
 import { posts } from "./controllers/posts.js";
 
+
+import getUserPosts from './controllers/getUserPosts.js';
 import { getUserProfile } from './controllers/getUserProfile.js';
 import { addComment } from './controllers/addComment.js';
 
@@ -52,19 +54,39 @@ app.post("/auth/register", upload.single("picture"), register);
 
 app.post('/create-post', upload.single('file'), posts);
 
+/* ROUTES */
+app.use("/auth", authRoutes);
+app.use("/posts", postRoute);
+
 app.get('/api/posts', async (req, res) => {
     const posts = await Post.find();
-    // console.log("GET /posts");
     res.json(posts);
 });
 
-/* ROUTES */
-app.use("/auth", authRoutes);
-app.use("/posts",postRoute);
+app.post('/api/get-user-posts', getUserPosts);
 
 app.get('/get-user-profile', getUserProfile);
 
 app.post('/add-comment/:postId', addComment);
+
+app.post('/upvote/:postId', async (req, res) => {
+    const { postId } = req.params;
+
+    try {
+        const post = await Post.findById(postId);
+
+        if (!post) {
+            return res.status(404).json({ error: 'Post not found' });
+        }
+        post.upvoteCount += 1;
+        await post.save();
+        res.status(200).json({ upvoteCount: post.upvoteCount });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Error upvoting the post' });
+    }
+});
+
 
 /* MONGOOSE SETUP */
 const PORT = process.env.PORT || 6001;
