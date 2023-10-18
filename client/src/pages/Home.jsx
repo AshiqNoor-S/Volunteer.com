@@ -13,7 +13,7 @@ const Home = () => {
   useEffect(() => {
     axios.get('http://localhost:3001/api/posts')
       .then((response) => {
-        // console.log(`axios: ${JSON.stringify(response.data[0])}`);
+        response.data.reverse();
         setPosts(response.data);
       })
       .catch((error) => {
@@ -33,7 +33,7 @@ const Home = () => {
           postTime={post.postTime}
           postContent={post.postContent}
           postFile={post.file}
-          postComments={post.postComments} loggedInUser={_id} />
+          postComments={post.postComments} loggedInUser={_id} upvoteCount={post.upvoteCount} />
       ))}
 
     </div>

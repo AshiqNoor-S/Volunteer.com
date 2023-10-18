@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { CreatePostStyle } from "../styles/Post/CreatePostStyle";
 import { useSelector } from 'react-redux';
 
 const CreatePost = (props) => {
+
+	const userState = useSelector((state) => state.user);
+
 	const [postContent, setPostContent] = useState('');
 	const [data, setData] = useState(null);
 	const [file, setFile] = useState(null);
@@ -12,31 +15,31 @@ const CreatePost = (props) => {
 
 	const fetchData = async () => {
 		try {
-		  const NGO_CATEGORY = 'healthcare';
-		  console.log(location);
-		  const GOVERNMENT_CATEGORY = 'office.government';
-		  const place = await fetch("https://api.geoapify.com/v1/geocode/search?text="+location+"&apiKey=303f4720094a4172a8ab37549d279277");
-		  const latlong = await place.json();
-		  const latitude = latlong.features[0].geometry.coordinates[1];
-		  const longitude = latlong.features[0].geometry.coordinates[0];
-		  const radiusInKilometers = 80;
-		  const earthRadius = 6371; 
-		  const angularRadius = radiusInKilometers / earthRadius;
+			const NGO_CATEGORY = 'healthcare';
+			console.log(location);
+			const GOVERNMENT_CATEGORY = 'office.government';
+			const place = await fetch("https://api.geoapify.com/v1/geocode/search?text=" + location + "&apiKey=303f4720094a4172a8ab37549d279277");
+			const latlong = await place.json();
+			const latitude = latlong.features[0].geometry.coordinates[1];
+			const longitude = latlong.features[0].geometry.coordinates[0];
+			const radiusInKilometers = 80;
+			const earthRadius = 6371;
+			const angularRadius = radiusInKilometers / earthRadius;
 
-		  const minLatitude = latitude - angularRadius * (180 / Math.PI);
-		  const minLongitude = longitude - angularRadius * (180 / Math.PI) / Math.cos(latitude * Math.PI / 180);
-		  const maxLatitude = latitude + angularRadius * (180 / Math.PI);
-		  const maxLongitude = longitude + angularRadius * (180 / Math.PI) / Math.cos(latitude * Math.PI / 180);
-		  const BOUNDING_BOX_FORMAT = `rect:${minLongitude},${minLatitude},${maxLongitude},${maxLatitude}`;
-		  const response = await fetch("https://api.geoapify.com/v2/places?categories="+GOVERNMENT_CATEGORY+","+NGO_CATEGORY+"&filter="+BOUNDING_BOX_FORMAT+"&limit=20&apiKey=303f4720094a4172a8ab37549d279277");
-		  const result = await response.json();
-		  const addressLine1Array = result.features.map(feature => feature.properties.address_line1);
-		  console.log('Address Line 1 Array:', addressLine1Array);
-		  setData(result.features);  // Set the entire features array if needed
-		  mergeAndFilterData(organisations);
-		  console.log(mergedData);
+			const minLatitude = latitude - angularRadius * (180 / Math.PI);
+			const minLongitude = longitude - angularRadius * (180 / Math.PI) / Math.cos(latitude * Math.PI / 180);
+			const maxLatitude = latitude + angularRadius * (180 / Math.PI);
+			const maxLongitude = longitude + angularRadius * (180 / Math.PI) / Math.cos(latitude * Math.PI / 180);
+			const BOUNDING_BOX_FORMAT = `rect:${minLongitude},${minLatitude},${maxLongitude},${maxLatitude}`;
+			const response = await fetch("https://api.geoapify.com/v2/places?categories=" + GOVERNMENT_CATEGORY + "," + NGO_CATEGORY + "&filter=" + BOUNDING_BOX_FORMAT + "&limit=20&apiKey=303f4720094a4172a8ab37549d279277");
+			const result = await response.json();
+			const addressLine1Array = result.features.map(feature => feature.properties.address_line1);
+			console.log('Address Line 1 Array:', addressLine1Array);
+			setData(result.features);  // Set the entire features array if needed
+			mergeAndFilterData(organisations);
+			console.log(mergedData);
 		} catch (error) {
-		  console.error('Error fetching data:', error);
+			console.error('Error fetching data:', error);
 		}
 	};
 
@@ -63,33 +66,33 @@ const CreatePost = (props) => {
 			const response = await fetch('http://localhost:3001/posts/getlocation', {
 				method: 'GET',
 			});
-			const locationData= await response.json();
+			const locationData = await response.json();
 			const postLocations = locationData
-			.filter(item => item.userName) // Filter out items without postLocation
-			.map(item => item.userName); // Map to extract postLocation
+				.filter(item => item.userName) // Filter out items without postLocation
+				.map(item => item.userName); // Map to extract postLocation
 			setOrganisation(postLocations);
 		} catch (error) {
 			console.error(error);
 		}
 	}
 
-	
+
 
 	const mergeAndFilterData = (postLocations) => {
-	  if (data && postLocations) {
-		// Merge the data from postLocations and data
-		const mergedData = [...postLocations, ...data.features.map(feature => feature.properties.name)];
-		// Filter out duplicates
-		const filteredData = mergedData.filter((item, index) => mergedData.indexOf(item) === index);
-		// Store the filtered data in state
-		setMergedData(filteredData);
-	  }
+		if (data && postLocations) {
+			// Merge the data from postLocations and data
+			const mergedData = [...postLocations, ...data.features.map(feature => feature.properties.name)];
+			// Filter out duplicates
+			const filteredData = mergedData.filter((item, index) => mergedData.indexOf(item) === index);
+			// Store the filtered data in state
+			setMergedData(filteredData);
+		}
 	};
-  
+
 
 	const handleSubmit = async (e) => {
 		fetchData();
-		e.preventDefault();
+		// e.preventDefault();
 		console.log('handleSubmit called 2');
 		const formData = new FormData();
 		formData.append('id', id);
@@ -97,6 +100,7 @@ const CreatePost = (props) => {
 		formData.append('file', file.name);
 		formData.append('user', firstName);
 		formData.append('postLocation', location);
+		formData.append('userEmail', userState.email);
 
 		try {
 			const response = await fetch('http://localhost:3001/create-post', {
@@ -119,7 +123,7 @@ const CreatePost = (props) => {
 	return (
 		<CreatePostStyle>
 			<section className='createPost'>
-				<img src='./images/user_icon.png' className="profile-icon" style={{ width: '50px' }} alt='user-profile-icon' />
+				<img src={userState.picturePath} className="profile-icon" style={{ width: '50px' }} alt='user-profile-icon' />
 				{/* <form action="/create-post" method="POST" enctype="multipart/form-data"> */}
 				<form onSubmit={handleSubmit} >
 					<div className="form-container">
