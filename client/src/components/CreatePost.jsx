@@ -141,25 +141,58 @@ const CreatePost = (props) => {
 	};
 
 	return (
-		<CreatePostStyle>
-			<section className='createPost'>
-				<img src={`/server/public/assets/${userState.picturePath}`} className="profile-icon" style={{ width: '50px' }} alt={`/server/assets/${userState.picturePath}`} />
-				{/* <form action="/create-post" method="POST" enctype="multipart/form-data"> */}
-				<form onSubmit={handleSubmit} >
-					<div className="form-container">
-						<textarea id="postContent" name="postContent" value={postContent} onChange={handlePostContentChange} className='create-post-textarea' rows={10} cols={10} placeholder='Create a post...'>
-						</textarea>
-						<div className="containerss">
-							{/* <span><button className="upload-button inline-buttons">Upload Photos/Videos</button></span> */}
-							<input type="text" id="location" name="location" value={location} onChange={handleLocationChange} placeholder='Location' required />
-							<input type="file" className="custom-file-input" id="file" name="file" accept="image/*, video/*" onChange={handleFileChange} />
-							<label className="custom-file-label upload-button inline-buttons" for="file">Upload Photos/Videos</label>
-							{/* <a href='#'><img src='./images/post_icon.png' className="post-icon" style={{ width: '32px' }} /></a> */}
-							<button type="submit" className='submit-icon' ></button>
-						</div>
-					</div>
-				</form>
-				{/* <div>
+    <CreatePostStyle>
+      <section className="createPost">
+        <img
+          src={userState.picturePath}
+          className="profile-icon"
+          style={{ width: "50px" }}
+          alt="user-profile-icon"
+        />
+        {/* <form action="/create-post" method="POST" enctype="multipart/form-data"> */}
+        <form onSubmit={handleSubmit}>
+          <div className="form-container">
+            <textarea
+              id="postContent"
+              name="postContent"
+              value={postContent}
+              onChange={handlePostContentChange}
+              className="create-post-textarea"
+              rows={5}
+              cols={10}
+              placeholder="Create a post..."
+            ></textarea>
+            <div className="containerss">
+              {/* <span><button className="upload-button inline-buttons">Upload Photos/Videos</button></span> */}
+              <input
+                type="text"
+                id="location"
+                name="location"
+                value={location}
+                onChange={handleLocationChange}
+                placeholder="Location"
+                required
+              />
+              <input
+                type="file"
+                className="custom-file-input"
+                id="file"
+                name="file"
+                accept="image/*, video/*"
+                onChange={handleFileChange}
+              />
+              <label
+                className="custom-file-label upload-button inline-buttons"
+                for="file"
+              >
+                Upload Photos/Videos
+              </label>
+              {/* <a href='#'><img src='./images/post_icon.png' className="post-icon" style={{ width: '32px' }} /></a> */}
+              <button type="submit" className="submit-icon"></button>
+            </div>
+          </div>
+        </form>
+        {/* <div>
 					<h1>NGOs and Government organisation nearby</h1>
 					{data ? (
 						<ul>
@@ -171,10 +204,9 @@ const CreatePost = (props) => {
 						<p>Loading data...</p>
 					)}
 				</div> */}
-			</section>
-
-		</CreatePostStyle>
-	)
+      </section>
+    </CreatePostStyle>
+  );
 }
 
 export default CreatePost
