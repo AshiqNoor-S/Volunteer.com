@@ -1,18 +1,24 @@
 import styled from "styled-components";
 
-export const PostStyle = styled.div`
+// #93A7FA
 
+export const PostStyle = styled.div`
   margin: auto;
   margin-top: 6vh;
   margin-bottom: 6vh;
   width: 60%;
   padding: 4vh 4vw;
   border-radius: 20px;
-  background-color: #bc6ff1;
+  border: 3px solid #96abff;
+  background-color: #F5F5FF;
   color: #fff !important;
 
   .postUserImage {
+    color: black;
     float: left;
+    border-radius: 50%;
+    border: 2px solid #96abff;
+    padding: 2px;
   }
 
   .postHeaderContent {
@@ -22,10 +28,10 @@ export const PostStyle = styled.div`
   }
 
   .postHeaderContent p {
+    color: black !important;
     line-height: 0.87rem;
     opacity: 1;
     font-size: 150%;
-    color: #fff !important;
   }
 
   .postTimeText {
@@ -34,15 +40,15 @@ export const PostStyle = styled.div`
   }
 
   .postContent {
-    color: #fff !important;
+    color: black !important;
     opacity: 1;
     width: 77%;
-    font-size: 150%;
+    font-size: 140%;
     margin: auto;
     margin-top: 6vh;
     margin-bottom: 6vh;
     line-height: 2.5rem;
-    font-weight: 500;
+    font-weight: 400;
   }
 
   .postMediaSection {
@@ -70,7 +76,7 @@ export const PostStyle = styled.div`
     /* border: 1px solid black; */
     width: 90%;
     margin: auto;
-    margin-top: 5vh;
+    margin-top: 2vh;
   }
 
   .commentSection input {
@@ -83,10 +89,10 @@ export const PostStyle = styled.div`
   }
 
   ::placeholder {
-  color: #bc6ff1;
-  font-weight: 900;
-  /* opacity: 1; */
-}
+    color: #869eff;
+    font-weight: 900;
+    /* opacity: 1; */
+  }
 
   .comment {
     width: 100%;
@@ -126,102 +132,98 @@ export const PostStyle = styled.div`
   }
 
   @media (max-width: ${({ theme }) => theme.media.tab}) {
-		width: 80%;
-
-    .postUserImage {
-    float: left;
-    position: relative;
-    left: 2vw;
-  }
-
-  .postHeaderContent {
-    position: relative;
-    left: 5vw;
-    top: 1vh;
-  }
-
-  .postContent {
-    width: 80%;
-  }
-
-  .postMediaSection {
-    width: 90%;
-    flex-direction: column;
-    padding: 3vh 3vw;
-  }
-
-
-  .media-img {
-    width: 100%;
-  }
-  
-  .commentSection input {
-    border-radius: 15px;
-    padding: 10px;
-    width: 80%;
-  }
-
-  .commentUserImg {
-    float: left;
-    width: 50px;
-  }
-
-  .commentBox {
-    width: 85%;
-    border-radius: 15px;
-    left: 6vw;
-    padding: 1.5vh 3vw;
-  }
-	}
-
-	@media (max-width: ${({ theme }) => theme.media.mobile}) {
     width: 80%;
 
     .postUserImage {
-    float: left;
-    position: relative;
-    left: 2vw;
+      float: left;
+      position: relative;
+      left: 2vw;
+    }
+
+    .postHeaderContent {
+      position: relative;
+      left: 5vw;
+      top: 1vh;
+    }
+
+    .postContent {
+      width: 80%;
+    }
+
+    .postMediaSection {
+      width: 90%;
+      flex-direction: column;
+      padding: 3vh 3vw;
+    }
+
+    .media-img {
+      width: 100%;
+    }
+
+    .commentSection input {
+      border-radius: 15px;
+      padding: 10px;
+      width: 80%;
+    }
+
+    .commentUserImg {
+      float: left;
+      width: 50px;
+    }
+
+    .commentBox {
+      width: 85%;
+      border-radius: 15px;
+      left: 6vw;
+      padding: 1.5vh 3vw;
+    }
   }
 
-  .postHeaderContent {
-    position: relative;
-    left: 5vw;
-    top: 1vh;
-  }
-
-  .postContent {
+  @media (max-width: ${({ theme }) => theme.media.mobile}) {
     width: 80%;
+
+    .postUserImage {
+      float: left;
+      position: relative;
+      left: 2vw;
+    }
+
+    .postHeaderContent {
+      position: relative;
+      left: 5vw;
+      top: 1vh;
+    }
+
+    .postContent {
+      width: 80%;
+    }
+
+    .postMediaSection {
+      width: 90%;
+      flex-direction: column;
+      padding: 3vh 3vw;
+    }
+
+    .media-img {
+      width: 100%;
+    }
+
+    .commentSection input {
+      border-radius: 15px;
+      padding: 10px;
+      width: 80%;
+    }
+
+    .commentUserImg {
+      float: left;
+      width: 30px;
+    }
+
+    .commentBox {
+      width: 85%;
+      border-radius: 15px;
+      left: 10vw;
+      padding: 1.5vh 5vw;
+    }
   }
-
-  .postMediaSection {
-    width: 90%;
-    flex-direction: column;
-    padding: 3vh 3vw;
-  }
-
-
-  .media-img {
-    width: 100%;
-  }
-
-  .commentSection input {
-    border-radius: 15px;
-    padding: 10px;
-    width: 80%;
-  }
-
-  .commentUserImg {
-    float: left;
-    width: 30px;
-  }
-
-  .commentBox {
-    width: 85%;
-    border-radius: 15px;
-    left: 10vw;
-    padding: 1.5vh 5vw;
-  }
-
-}
-
 `;

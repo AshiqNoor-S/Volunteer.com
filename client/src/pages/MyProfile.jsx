@@ -32,7 +32,11 @@ const MyProfile = () => {
           style={{ width: "100%" }}
           alt="profile-banner"
         />
-        <img src={userState.picturePath} className="profile-pic" alt="profile-pic" />
+        <img
+          src={userState.picturePath}
+          className="profile-pic"
+          alt="profile-pic"
+        />
       </div>
       <div className="heading-text">
         <h1 className="user-name">{`${userState.firstName} ${userState.lastName}`}</h1>
@@ -42,14 +46,14 @@ const MyProfile = () => {
       <div className="about-me">
         <h1 className="about-me-heading">About Me</h1>
         <p className="about-me-text">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce mattis
-          risus sed elit bibendum ultrices. Duis vel sapien varius, sagittis
-          risus sit amet, placerat nulla Lorem ipsum dolor sit amet, consectetur
-          adipiscing elit. Fusce mattis risus sed elit bibendum ultrices. Duis
-          vel sapien varius, sagittis risus sit amet, placerat nulla Lorem ipsum
-          dolor sit amet, consectetur adipiscing elit. Fusce mattis risus sed
-          elit bibendum ultrices. Duis vel sapien varius, sagittis risus sit
-          amet, placerat nulla
+          Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          Necessitatibus, exercitationem eveniet eos minus repellat minima.
+          Voluptas voluptatum explicabo ipsum quam suscipit amet. Necessitatibus
+          porro aliquid exercitationem officia. Voluptatum alias ea atque quo
+          consequatur facere rerum adipisci qui odio, blanditiis maiores quod
+          officia eum dolores dicta et pariatur. Beatae voluptates porro minima
+          itaque consequatur tempore dolor asperiores molestias dolorum, eum
+          nulla!
         </p>
       </div>
 
@@ -64,18 +68,20 @@ const MyProfile = () => {
           </div>
         ))} */}
 
-
         {userPosts.map((post) => (
-          <Post key={post._id} postId={post._id} userName={post.userName}
+          <Post
+            key={post._id}
+            postId={post._id}
+            userName={post.userName}
             userTitle={post.userTitle}
             userPhotoURL={post.userPhotoURL}
             postTime={post.postTime}
             postContent={post.postContent}
             postFile={post.file}
             postComments={post.postComments}
-            upvoteCount={post.upvoteCount} />
+            upvoteCount={post.upvoteCount}
+          />
         ))}
-
       </div>
     </ProfileStyle>
   );

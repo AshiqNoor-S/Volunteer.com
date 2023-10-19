@@ -61,6 +61,11 @@ export const ProfileStyle = styled.div`
     font-weight: 600;
   }
 
+  .about-me-text {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+
   .my-posts {
     margin: 2vh 0;
   }
