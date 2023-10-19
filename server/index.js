@@ -51,14 +51,23 @@ const storage = multer.diskStorage({
     }
 });
 
+const storagePostImg = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, "./public/assets");
+    }
+    , filename: (req, file, cb) => {
+        cb(null, file.originalname);
+    }
+});
+
 const upload = multer({ storage });
 
-
+const uploadPostPic = multer({ storagePostImg });
 
 /* ROUTES WITH FILES*/
 app.post("/auth/register", upload.single("picture"), register);
 
-app.post('/create-post', upload.single('file'), posts);
+app.post('/create-post', uploadPostPic.single('file'), posts);
 
 /* ROUTES */
 app.use("/auth", authRoutes);
