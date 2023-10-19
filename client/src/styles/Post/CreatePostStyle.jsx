@@ -162,7 +162,7 @@ export const CreatePostStyle = styled.div`
 
     .submit-icon {
       left: 10vw;
-      bottom: 0vh;
+      bottom: -1vh;
     }
   }
 `;

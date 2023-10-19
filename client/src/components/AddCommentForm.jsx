@@ -120,8 +120,7 @@ function AddCommentForm(props) {
           required
         />
         <button type="submit" className="plusBtn">
-          {" "}
-          +{" "}
+          +
         </button>
       </form>
     </AddCommentStyle>
@@ -144,8 +143,16 @@ const AddCommentStyle = styled.section`
 
   @media (max-width: ${({ theme }) => theme.media.tab}) {
     .plusBtn {
-      top: -5vh;
-      right: -54vw;
+      top: 2px;
+      left: -45px;
+      position: relative;
+    }
+  }
+
+  @media (max-width: ${({ theme }) => theme.media.mobile}) {
+    .plusBtn {
+      top: -35px;
+      left: 210px;
       position: relative;
     }
   }
