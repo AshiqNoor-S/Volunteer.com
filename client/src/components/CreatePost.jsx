@@ -143,7 +143,7 @@ const CreatePost = (props) => {
 	return (
 		<CreatePostStyle>
 			<section className='createPost'>
-				<img src={userState.picturePath} className="profile-icon" style={{ width: '50px' }} alt='user-profile-icon' />
+				<img src={`/server/public/assets/${userState.picturePath}`} className="profile-icon" style={{ width: '50px' }} alt={`/server/assets/${userState.picturePath}`} />
 				{/* <form action="/create-post" method="POST" enctype="multipart/form-data"> */}
 				<form onSubmit={handleSubmit} >
 					<div className="form-container">
