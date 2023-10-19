@@ -144,7 +144,7 @@ const CreatePost = (props) => {
     <CreatePostStyle>
       <section className="createPost">
         <img
-          src={userState.picturePath}
+          src={`/server/public/assets/${userState.picturePath}`}
           className="profile-icon"
           style={{ width: "50px" }}
           alt="user-profile-icon"

@@ -38,8 +38,8 @@ const corsOptions = {
 };
   
 app.use(cors(corsOptions));
-app.use(express.static('public'));
-// app.use("/assets", express.static(path.join(__dirname, '/public/assets')));
+// app.use(express.static('public'));
+app.use("/assets", express.static(path.join(__dirname, '/public/assets')));
 
 /* FILE STORAGE */
 const storage = multer.diskStorage({
