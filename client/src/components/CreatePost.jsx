@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { CreatePostStyle } from "../styles/Post/CreatePostStyle";
 import { useSelector } from 'react-redux';
-import sgMail from "@sendgrid/mail";
+import axios from 'axios';
 
 const CreatePost = (props) => {
 
@@ -122,24 +122,49 @@ const CreatePost = (props) => {
 			// Store the filtered data with userEmails in state
 			setMergedData(mergedDataWithEmails);
 			// email sending part is written below
-			const API_KEY =
-				"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";
 
-			// const sgMail = require("@sendgrid/mail");
-			sgMail.setApiKey(API_KEY);
+			const sendGridAPIKey = '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';
 
-			const message = {
-				to: mergedData,
-				from: "priyanshu.pattanaik1011@gmail.com",
-				subject: "Hello from Volunteers.com",
-				text: "Hello from Volunteers.com",
-				html: "<h1>Hello from Volunteers.com</h1>",
+			const emailData = {
+			personalizations: [
+				{
+				to: [
+					{
+					email: 'recipient@example.com',
+					},
+				],
+				},
+			],
+			from: {
+				email: 'sender@example.com',
+			},
+			subject: 'Hello from Volunteers.com',
+			content: [
+				{
+				type: 'text/plain',
+				value: 'Hello from Volunteers.com',
+				},
+				{
+				type: 'text/html',
+				value: '<h1>Hello from Volunteers.com</h1>',
+				},
+			],
 			};
 
-			sgMail
-				.send(message)
-				.then((response) => console.log("Email sent"))
-				.catch((error) => console.log(error.message));
+			axios
+			.post('https://api.sendgrid.com/v3/mail/send', emailData, {
+				headers: {
+				Authorization: `Bearer ${sendGridAPIKey}`,
+				'Content-Type': 'application/json',
+				},
+			})
+			.then((response) => {
+				console.log('Email sent');
+			})
+			.catch((error) => {
+				console.error(error);
+			});
+
 		}
 	};
 
