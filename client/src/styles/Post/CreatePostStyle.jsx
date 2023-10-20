@@ -113,10 +113,19 @@ export const CreatePostStyle = styled.div`
   @media (max-width: ${({ theme }) => theme.media.tab}) {
     width: 80%;
 
+    .createPost {
+      height: 225px;
+    }
+
     .post-icon {
       position: relative;
       left: 20vw;
       margin-top: 0vh;
+    }
+
+    .submit-icon {
+      left: 55vw;
+      bottom: 4vh;
     }
   }
 

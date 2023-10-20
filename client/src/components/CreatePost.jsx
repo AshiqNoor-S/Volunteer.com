@@ -96,17 +96,41 @@ const CreatePost = (props) => {
 
 	const mergeAndFilterData = (postLocations, postEmails) => {
 		if (data && postLocations) {
-		  // Merge the data from postLocations and data
-		  const mergedData = [...postLocations, ...data.features.map(feature => feature.properties.name)];
-		  // Filter out duplicates
-		  const filteredData = mergedData.filter((item, index) => mergedData.indexOf(item) === index);
-		  // Create an array to hold objects with userName and userEmail
-		  const mergedDataWithEmails = filteredData.map(userName => ({
-			userEmail: postEmails[postLocations.indexOf(userName)] || null,
-		  }));
-		  // Store the filtered data with userEmails in state
-		  setMergedData(mergedDataWithEmails);
-		}
+      // Merge the data from postLocations and data
+      const mergedData = [
+        ...postLocations,
+        ...data.features.map((feature) => feature.properties.name),
+      ];
+      // Filter out duplicates
+      const filteredData = mergedData.filter(
+        (item, index) => mergedData.indexOf(item) === index
+      );
+      // Create an array to hold objects with userName and userEmail
+      const mergedDataWithEmails = filteredData.map((userName) => ({
+        userEmail: postEmails[postLocations.indexOf(userName)] || null,
+      }));
+      // Store the filtered data with userEmails in state
+      setMergedData(mergedDataWithEmails);
+      // email sending part is written below
+      const API_KEY =
+        "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";
+
+      const sgMail = require("@sendgrid/mail");
+      sgMail.setApiKey(API_KEY);
+
+      const message = {
+        to: mergedData,
+        from: "priyanshu.pattanaik1011@gmail.com",
+        subject: "Hello from Volunteers.com",
+        text: "Hello from Volunteers.com",
+        html: "<h1>Hello from Volunteers.com</h1>",
+      };
+
+      sgMail
+        .send(message)
+        .then((response) => console.log("Email sent"))
+        .catch((error) => console.log(error.message));
+    }
 	  };
 
 
