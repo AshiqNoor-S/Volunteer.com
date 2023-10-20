@@ -38,6 +38,7 @@ const CreatePost = (props) => {
 			console.log('Address Line 1 Array:', addressLine1Array);
 			setData(result.features);  // Set the entire features array if needed
 			mergeAndFilterData(organisations);
+			console.log(data.features);
 			console.log(mergedData);
 		} catch (error) {
 			console.error('Error fetching data:', error);
@@ -216,18 +217,7 @@ const CreatePost = (props) => {
             </div>
           </div>
         </form>
-        {/* <div>
-					<h1>NGOs and Government organisation nearby</h1>
-					{data ? (
-						<ul>
-						{data.features.map((feature, index) => (
-							<li key={index}>{feature.properties.name}</li>
-						))}
-						</ul>
-					) : (
-						<p>Loading data...</p>
-					)}
-				</div> */}
+
       </section>
     </CreatePostStyle>
   );
