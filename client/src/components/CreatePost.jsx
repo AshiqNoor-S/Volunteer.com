@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { CreatePostStyle } from "../styles/Post/CreatePostStyle";
 import { useSelector } from 'react-redux';
+import sgMail from "@sendgrid/mail";
 
 const CreatePost = (props) => {
 
@@ -124,7 +125,7 @@ const CreatePost = (props) => {
 			const API_KEY =
 				"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";
 
-			const sgMail = require("@sendgrid/mail");
+			// const sgMail = require("@sendgrid/mail");
 			sgMail.setApiKey(API_KEY);
 
 			const message = {
