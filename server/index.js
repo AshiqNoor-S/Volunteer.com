@@ -33,7 +33,7 @@ app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 const corsOptions = {
-    origin: 'http://localhost:3000',
+    origin: 'https://volunteer-xnpy.onrender.com',
     optionsSuccessStatus: 200,
 };
   
