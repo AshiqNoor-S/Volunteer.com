@@ -12,7 +12,7 @@ const MyProfile = () => {
 
   useEffect(() => {
     // Make a GET request to the /api/get-user-posts endpoint
-    axios.post('http://localhost:3001/api/get-user-posts', { email: userState.email })
+    axios.post('https://volunteer-xnpy.onrender.com/api/get-user-posts', { email: userState.email })
       .then(response => {
         response.data.reverse();
         setUserPosts(response.data);

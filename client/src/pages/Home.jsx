@@ -10,7 +10,7 @@ const Home = () => {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:3001/api/posts')
+    axios.get('https://volunteer-xnpy.onrender.com/api/posts')
       .then((response) => {
         response.data.reverse();
         setPosts(response.data);
