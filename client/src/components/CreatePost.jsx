@@ -63,7 +63,7 @@ const CreatePost = (props) => {
 
 	const getLocation = async () => {
 		try {
-			const response = await fetch('http://localhost:3001/posts/getlocation', {
+			const response = await fetch('https://volunteer-xnpy.onrender.com/posts/getlocation', {
 				method: 'GET',
 			});
 			const locationData = await response.json();
@@ -148,7 +148,7 @@ const CreatePost = (props) => {
 		formData.append('userEmail', userState.email);
 
 		try {
-			const response = await fetch('http://localhost:3001/create-post', {
+			const response = await fetch('https://volunteer-xnpy.onrender.com/create-post', {
 				method: 'POST',
 				body: formData,
 			});
