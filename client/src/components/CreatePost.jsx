@@ -17,7 +17,6 @@ const CreatePost = (props) => {
 	const fetchData = async () => {
 		try {
 			const NGO_CATEGORY = 'office.non_profit';
-			console.log(location);
 			const GOVERNMENT_CATEGORY = 'office.government';
 			const place = await fetch("https://api.geoapify.com/v1/geocode/search?text=" + location + "&apiKey=303f4720094a4172a8ab37549d279277");
 			const latlong = await place.json();

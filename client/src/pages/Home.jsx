@@ -2,11 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from "react-redux";
 import axios from 'axios';
 import CreatePost from "../components/CreatePost";
-import Location from "./Location";
 import Post from "../components/Post";
 
 const Home = () => {
-  const { _id, picturePath } = useSelector((state) => state.user);
+  const { _id} = useSelector((state) => state.user);
 
   const [posts, setPosts] = useState([]);
 
