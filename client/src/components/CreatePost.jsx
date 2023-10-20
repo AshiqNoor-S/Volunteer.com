@@ -9,10 +9,19 @@ const CreatePost = (props) => {
 	const [postContent, setPostContent] = useState('');
 	const [data, setData] = useState(null);
 	const [file, setFile] = useState(null);
+	const [selectedImage, setSelectedImage] = useState(null);
 	const [organisations, setOrganisation] = useState(null);
 	const [emails, setEmail] = useState(null);
 	const [location, setLocation] = useState('');
 	const [mergedData, setMergedData] = useState([]);
+
+	const handleImageChange = (e) => {
+		const file = e.target.files[0]; // Get the first selected file
+
+		if (file) {
+			setSelectedImage(file);
+		}
+	};
 
 	const fetchData = async () => {
 		try {
@@ -71,12 +80,12 @@ const CreatePost = (props) => {
 				.map(item => item.userName); // Map to extract postLocation
 
 			const postEmail = locationData
-			.filter(item => item.userEmail) // Filter out items without postLocation
-			.map(item => item.userEmail); 
+				.filter(item => item.userEmail) // Filter out items without postLocation
+				.map(item => item.userEmail);
 
 			console.log(postEmail);
-			
-			setOrganisation(postLocations,emails);
+
+			setOrganisation(postLocations, emails);
 			setEmail(postEmail);
 		} catch (error) {
 			console.error(error);
@@ -96,55 +105,56 @@ const CreatePost = (props) => {
 
 	const mergeAndFilterData = (postLocations, postEmails) => {
 		if (data && postLocations) {
-      // Merge the data from postLocations and data
-      const mergedData = [
-        ...postLocations,
-        ...data.features.map((feature) => feature.properties.name),
-      ];
-      // Filter out duplicates
-      const filteredData = mergedData.filter(
-        (item, index) => mergedData.indexOf(item) === index
-      );
-      // Create an array to hold objects with userName and userEmail
-      const mergedDataWithEmails = filteredData.map((userName) => ({
-        userEmail: postEmails[postLocations.indexOf(userName)] || null,
-      }));
-      // Store the filtered data with userEmails in state
-      setMergedData(mergedDataWithEmails);
-      // email sending part is written below
-      const API_KEY =
-        "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";
+			// Merge the data from postLocations and data
+			const mergedData = [
+				...postLocations,
+				...data.features.map((feature) => feature.properties.name),
+			];
+			// Filter out duplicates
+			const filteredData = mergedData.filter(
+				(item, index) => mergedData.indexOf(item) === index
+			);
+			// Create an array to hold objects with userName and userEmail
+			const mergedDataWithEmails = filteredData.map((userName) => ({
+				userEmail: postEmails[postLocations.indexOf(userName)] || null,
+			}));
+			// Store the filtered data with userEmails in state
+			setMergedData(mergedDataWithEmails);
+			// email sending part is written below
+			const API_KEY =
+				"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";
 
-      const sgMail = require("@sendgrid/mail");
-      sgMail.setApiKey(API_KEY);
+			const sgMail = require("@sendgrid/mail");
+			sgMail.setApiKey(API_KEY);
 
-      const message = {
-        to: mergedData,
-        from: "priyanshu.pattanaik1011@gmail.com",
-        subject: "Hello from Volunteers.com",
-        text: "Hello from Volunteers.com",
-        html: "<h1>Hello from Volunteers.com</h1>",
-      };
+			const message = {
+				to: mergedData,
+				from: "priyanshu.pattanaik1011@gmail.com",
+				subject: "Hello from Volunteers.com",
+				text: "Hello from Volunteers.com",
+				html: "<h1>Hello from Volunteers.com</h1>",
+			};
 
-      sgMail
-        .send(message)
-        .then((response) => console.log("Email sent"))
-        .catch((error) => console.log(error.message));
-    }
-	  };
+			sgMail
+				.send(message)
+				.then((response) => console.log("Email sent"))
+				.catch((error) => console.log(error.message));
+		}
+	};
 
 
 	const handleSubmit = async (e) => {
 		fetchData();
-		e.preventDefault();
+		// e.preventDefault();
 		console.log('handleSubmit called 2');
 		const formData = new FormData();
 		formData.append('id', id);
 		formData.append('postContent', postContent);
-		formData.append('file', file.name);
+		// formData.append('file', file.name);
 		formData.append('user', firstName);
 		formData.append('postLocation', location);
 		formData.append('userEmail', userState.email);
+		formData.append('postImage', selectedImage);
 
 		try {
 			const response = await fetch('https://volunteer-xnpy.onrender.com/create-post', {
@@ -165,61 +175,60 @@ const CreatePost = (props) => {
 	};
 
 	return (
-    <CreatePostStyle>
-      <section className="createPost">
-        <img
-          src={`/server/public/assets/${userState.picturePath}`}
-          className="profile-icon"
-          style={{ width: "50px" }}
-          alt="user-profile-icon"
-        />
-        {/* <form action="/create-post" method="POST" enctype="multipart/form-data"> */}
-        <form onSubmit={handleSubmit}>
-          <div className="form-container">
-            <textarea
-              id="postContent"
-              name="postContent"
-              value={postContent}
-              onChange={handlePostContentChange}
-              className="create-post-textarea"
-              rows={5}
-              cols={10}
-              placeholder="Create a post..."
-            ></textarea>
-            <div className="containerss">
-              {/* <span><button className="upload-button inline-buttons">Upload Photos/Videos</button></span> */}
-              <input
-                type="text"
-                id="location"
-                name="location"
-                value={location}
-                onChange={handleLocationChange}
-                placeholder="Location"
-                required
-              />
-              <input
-                type="file"
-                className="custom-file-input"
-                id="file"
-                name="file"
-                accept="image/*, video/*"
-                onChange={handleFileChange}
-              />
-              <label
-                className="custom-file-label upload-button inline-buttons"
-                for="file"
-              >
-                Upload Photos/Videos
-              </label>
-              {/* <a href='#'><img src='./images/post_icon.png' className="post-icon" style={{ width: '32px' }} /></a> */}
-              <button type="submit" className="submit-icon"></button>
-            </div>
-          </div>
-        </form>
+		<CreatePostStyle>
+			<section className="createPost">
+				<img
+					src={`/server/public/assets/${userState.picturePath}`}
+					className="profile-icon"
+					style={{ width: "50px" }}
+					alt="user-profile-icon"
+				/>
+				{/* <form action="/create-post" method="POST" enctype="multipart/form-data"> */}
+				<form encType="multipart/form-data" onSubmit={handleSubmit}>
+					<div className="form-container">
+						<textarea
+							id="postContent"
+							name="postContent"
+							value={postContent}
+							onChange={handlePostContentChange}
+							className="create-post-textarea"
+							rows={5}
+							cols={10}
+							placeholder="Create a post..."
+						></textarea>
+						<div className="containerss">
+							{/* <span><button className="upload-button inline-buttons">Upload Photos/Videos</button></span> */}
+							<input
+								type="text"
+								id="location"
+								name="location"
+								value={location}
+								onChange={handleLocationChange}
+								placeholder="Location"
+								required
+							/>
+							<input
+								type="file"
+								className="custom-file-input"
+								id="file"
+								name="postImage" onChange={handleImageChange}
+								accept="image/*, video/*"
+							/>
+							<label
+								className="custom-file-label upload-button inline-buttons"
+								for="file"
+							>
+								Upload Photos/Videos
+							</label>
+							{/* <a href='#'><img src='./images/post_icon.png' className="post-icon" style={{ width: '32px' }} /></a> */}
+							<button type="submit" className="submit-icon"></button>
+						</div>
+					</div>
+				</form>
 
-      </section>
-    </CreatePostStyle>
-  );
+			</section>
+		</CreatePostStyle>
+	);
 }
 
 export default CreatePost

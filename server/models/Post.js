@@ -14,9 +14,9 @@ const commentSchema = new mongoose.Schema({
 
 const postSchema = new mongoose.Schema({
 	id: {
-		type: String, 
+		type: String,
 		required: true,
-		unique:true,
+		unique: true,
 	},
 	userName: String,
 	userTitle: String,
@@ -27,13 +27,17 @@ const postSchema = new mongoose.Schema({
 	userEmail: String,
 	postTime: String,
 	postContent: {
-		type: String, 
-		required:true,
-	}, 
-	file: String, 
+		type: String,
+		required: true,
+	},
+	// file: String,
 	postLocation: String,
-	postComments: [commentSchema], 
+	postComments: [commentSchema],
 	upvoteCount: Number,
+	image: {
+		data: Buffer,
+		contentType: String,
+	},
 },
 	{ timestamps: true }
 );
