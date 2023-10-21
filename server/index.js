@@ -34,15 +34,15 @@ app.use(express.json());
 app.use(helmet());
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 
-app.use(
-    helmet.contentSecurityPolicy({
-        directives: {
-            "default-src": ["'self'", "https://volunteer-phi.vercel.app"],
-            "script-src": ["'self'", "https://volunteer-phi.vercel.app"],
-            // Add other necessary permissions for your backend domain
-        }
-    })
-);
+// app.use(
+//     helmet.contentSecurityPolicy({
+//         directives: {
+//             "default-src": ["'self'", "https://volunteer-phi.vercel.app"],
+//             "script-src": ["'self'", "https://volunteer-phi.vercel.app"],
+//             // Add other necessary permissions for your backend domain
+//         }
+//     })
+// );
 
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
