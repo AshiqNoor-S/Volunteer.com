@@ -235,7 +235,7 @@ const CreatePost = (props) => {
 		fetch('https://volunteer-xnpy.onrender.com/create-post', {
 		// fetch('http://localhost:3001/create-post', {
 			method: 'POST',
-			crossDomain: true,
+			// crossDomain: true,
 			headers: {
 				"Content-Type": "application/json", Accept: "application/json",
 			},
