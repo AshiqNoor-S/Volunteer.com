@@ -5,20 +5,34 @@ import CreatePost from "../components/CreatePost";
 import Post from "../components/Post";
 
 const Home = () => {
-  const { _id} = useSelector((state) => state.user);
+  const { _id } = useSelector((state) => state.user);
 
   const [posts, setPosts] = useState([]);
 
+  // useEffect(() => {
+  //   axios.get('https://volunteer-xnpy.onrender.com/api/posts')
+  //     .then((response) => {
+  //       response.data.reverse();
+  //       setPosts(response.data);
+  //     })
+  //     .catch((error) => {
+  //       console.error('Error fetching posts: ', error);
+  //     });
+  // }, []);
+
   useEffect(() => {
-    axios.get('https://volunteer-xnpy.onrender.com/api/posts')
-      .then((response) => {
-        response.data.reverse();
-        setPosts(response.data);
-      })
-      .catch((error) => {
-        console.error('Error fetching posts: ', error);
-      });
+    getImage();
   }, []);
+
+  function getImage() {
+    fetch('https://volunteer-xnpy.onrender.com/api/posts', {
+    // fetch('http://localhost:3001/api/posts', {
+      method: 'GET',
+    }).then((res) => res.json()).then((data) => {
+      console.log(data);
+      setPosts(data.data);
+    });
+  }
 
   return (
     <div>
@@ -31,8 +45,8 @@ const Home = () => {
           userPhotoURL={post.userPhotoURL}
           postTime={post.postTime}
           postContent={post.postContent}
-          postFile={post.file}
-          postComments={post.postComments} loggedInUser={_id} upvoteCount={post.upvoteCount} />
+          // postFile={post.file}
+          postComments={post.postComments} loggedInUser={_id} upvoteCount={post.upvoteCount} src={post.image} />
       ))}
 
     </div>

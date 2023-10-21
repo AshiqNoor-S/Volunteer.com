@@ -44,7 +44,7 @@ function AddCommentForm(props) {
     if (!isUpvoted) {
       try {
         const response = await axios.post(
-          `http://localhost:3001/upvote/${postId}`
+          `https://volunteer-xnpy.onrender.com/upvote/${postId}`
         );
         const { upvoteCount } = response.data;
         setUpvoteCount(upvoteCount);
@@ -61,7 +61,7 @@ function AddCommentForm(props) {
     try {
       // console.log(userState);
       const response = await fetch(
-        `http://localhost:3001/add-comment/${postId}`,
+        `https://volunteer-xnpy.onrender.com/add-comment/${postId}`,
         {
           method: "POST",
           headers: {

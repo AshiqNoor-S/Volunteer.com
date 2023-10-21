@@ -26,7 +26,7 @@ const Post = (props) => {
 					{props.postContent}
 				</p>
 				<div className='postMediaSection'>
-					<img src={`/server/public/assets/${props.postFile}`} className='media-img' alt='media' />
+					<img src={props.src} className='media-img' alt='media' />
 					{/* {props.postFile.map((media) => (
     <PostStyle>
       <section className="postHeader">
