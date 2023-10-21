@@ -12,6 +12,7 @@ import { register } from "./controllers/auth.js";
 import { verifyToken } from './middleware/auth.js';
 import postRoute from './routes/posts.js';
 
+
 import Post from './models/Post.js';
 import { posts } from "./controllers/posts.js";
 
@@ -88,7 +89,7 @@ app.post("/auth/register", upload.single("picture"), register);
 
 // app.post('/create-post', uploadPostPic.single('file'), posts);
 
-app.post('/create-post', posts);
+app.post('/create-post', verifyToken, posts);
 
 /* ROUTES */
 app.use("/auth", authRoutes);
@@ -108,7 +109,7 @@ app.post('/api/get-user-posts', getUserPosts);
 
 app.get('/get-user-profile', getUserProfile);
 
-app.post('/add-comment/:postId', addComment);
+app.post('/add-comment/:postId', verifyToken, addComment);
 
 app.post('/upvote/:postId', async (req, res) => {
     const { postId } = req.params;
