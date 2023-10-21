@@ -239,7 +239,7 @@ const CreatePost = (props) => {
 				headers: {
 					"Content-Type": "application/json", Accept: "application/json",
 				},
-				body: JSON.stringify({ id: id, postContent: postContent, user: firstName, postLocation: location, userEmail: userState.email, base64: file }),
+				body: { id: id, postContent: postContent, user: firstName, postLocation: location, userEmail: userState.email, base64: file },
 			}).then((res) => res.json()).then((data) => console.log(data));
 		} catch (e) {
 			alert(e);
