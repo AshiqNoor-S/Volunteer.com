@@ -34,10 +34,7 @@ const postSchema = new mongoose.Schema({
 	postLocation: String,
 	postComments: [commentSchema],
 	upvoteCount: Number,
-	image: {
-		data: Buffer,
-		contentType: String,
-	},
+	image: String,
 },
 	{ timestamps: true }
 );

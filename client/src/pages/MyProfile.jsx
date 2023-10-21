@@ -33,9 +33,9 @@ const MyProfile = () => {
           alt="profile-banner"
         />
         <img
-          src={userState.picturePath}
+          src={`https://volunteer-xnpy.onrender.com/assets/${userState.picturePath}`}
           className="profile-pic"
-          alt="profile-pic"
+          alt='user-profile-pic'
         />
       </div>
       <div className="heading-text">

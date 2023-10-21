@@ -9,7 +9,7 @@ const CreatePost = (props) => {
 
 	const [postContent, setPostContent] = useState('');
 	const [data, setData] = useState(null);
-	const [file, setFile] = useState(null);
+	const [file, setFile] = useState("");
 	const [selectedImage, setSelectedImage] = useState(null);
 	const [organisations, setOrganisation] = useState(null);
 	const [emails, setEmail] = useState(null);
@@ -17,10 +17,45 @@ const CreatePost = (props) => {
 	const [mergedData, setMergedData] = useState([]);
 
 	const handleImageChange = (e) => {
-		const file = e.target.files[0]; // Get the first selected file
+		// const file = e.target.files[0]; // Get the first selected file
 
-		if (file) {
-			setSelectedImage(file);
+		// if (file) {
+		// 	setSelectedImage(file);
+		// }
+
+
+		// YT vid
+		// var reader = new FileReader();
+		// reader.readAsDataURL(e.target.files[0]);
+		// reader.onload = () => {
+		// 	console.log(reader.result); //base64encoded string
+		// 	setFile(reader.result);
+		// };
+
+		// reader.onerror = error => {
+		// 	console.log("Error: ", error);
+		// };
+
+		const selectedFile = e.target.files[0];
+
+		if (selectedFile) {
+			const reader = new FileReader();
+			// console.log(selectedFile.size) // bytes
+
+			let dataURL = "";
+			reader.onload = (e) => {
+				// The data URL is available here
+				dataURL = e.target.result;
+				// console.log('readerrrrr\n')
+				// console.log(dataURL);
+				// reader.readAsDataURL(selectedFile);
+				setFile(dataURL);
+				// console.log(`ahem\n${file}`)
+			};
+
+			reader.readAsDataURL(selectedFile);
+			// setFile(dataURL)
+
 		}
 	};
 
@@ -58,9 +93,9 @@ const CreatePost = (props) => {
 		setPostContent(e.target.value);
 	};
 
-	const handleFileChange = (e) => {
-		setFile(e.target.files[0]);
-	};
+	// const handleFileChange = (e) => {
+	// 	setFile(e.target.files[0]);
+	// };
 
 	const handleLocationChange = (e) => {
 		setLocation(e.target.value);
@@ -126,51 +161,51 @@ const CreatePost = (props) => {
 			const sendGridAPIKey = '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';
 
 			const emailData = {
-			personalizations: [
-				{
-				to: [
+				personalizations: [
 					{
-					email: 'recipient@example.com',
+						to: [
+							{
+								email: 'recipient@example.com',
+							},
+						],
 					},
 				],
+				from: {
+					email: 'sender@example.com',
 				},
-			],
-			from: {
-				email: 'sender@example.com',
-			},
-			subject: 'Hello from Volunteers.com',
-			content: [
-				{
-				type: 'text/plain',
-				value: 'Hello from Volunteers.com',
-				},
-				{
-				type: 'text/html',
-				value: '<h1>Hello from Volunteers.com</h1>',
-				},
-			],
+				subject: 'Hello from Volunteers.com',
+				content: [
+					{
+						type: 'text/plain',
+						value: 'Hello from Volunteers.com',
+					},
+					{
+						type: 'text/html',
+						value: '<h1>Hello from Volunteers.com</h1>',
+					},
+				],
 			};
 
 			axios
-			.post('https://api.sendgrid.com/v3/mail/send', emailData, {
-				headers: {
-				Authorization: `Bearer ${sendGridAPIKey}`,
-				'Content-Type': 'application/json',
-				},
-			})
-			.then((response) => {
-				console.log('Email sent');
-			})
-			.catch((error) => {
-				console.error(error);
-			});
+				.post('https://api.sendgrid.com/v3/mail/send', emailData, {
+					headers: {
+						Authorization: `Bearer ${sendGridAPIKey}`,
+						'Content-Type': 'application/json',
+					},
+				})
+				.then((response) => {
+					console.log('Email sent');
+				})
+				.catch((error) => {
+					console.error(error);
+				});
 
 		}
 	};
 
 
 	const handleSubmit = async (e) => {
-		fetchData();
+		// fetchData();
 		// e.preventDefault();
 		console.log('handleSubmit called 2');
 		const formData = new FormData();
@@ -180,23 +215,35 @@ const CreatePost = (props) => {
 		formData.append('user', firstName);
 		formData.append('postLocation', location);
 		formData.append('userEmail', userState.email);
-		formData.append('postImage', selectedImage);
+		formData.append('base64', file);
 
-		try {
-			const response = await fetch('https://volunteer-xnpy.onrender.com/create-post', {
-				method: 'POST',
-				body: formData,
-			});
+		// try {
+		// 	const response = await fetch('https://volunteer-xnpy.onrender.com/create-post', {
+		// 		method: 'POST',
+		// 		body: formData,
+		// 	});
 
-			if (response.ok) {
-				console.log("Post created successfully!");
-			} else {
-				console.log("Post not created. Please try again!");
-			}
-		} catch (error) {
-			console.error(error);
-		}
-		getLocation();
+		// 	if (response.ok) {
+		// 		console.log("Post created successfully!");
+		// 	} else {
+		// 		console.log("Post not created. Please try again!");
+		// 	}
+		// } catch (error) {
+		// 	console.error(error);
+		// }
+
+		fetch('https://volunteer-xnpy.onrender.com/create-post', {
+		// fetch('http://localhost:3001/create-post', {
+			method: 'POST',
+			crossDomain: true,
+			headers: {
+				"Content-Type": "application/json", Accept: "application/json", "Access-Control-Allow-Origin": "*",
+			},
+			body: JSON.stringify({ id: id, postContent: postContent, user: firstName, postLocation: location, userEmail: userState.email, base64: file }),
+		}).then((res) => res.json()).then((data) => console.log(data));
+
+
+		// getLocation();
 
 	};
 
@@ -204,7 +251,7 @@ const CreatePost = (props) => {
 		<CreatePostStyle>
 			<section className="createPost">
 				<img
-					src={`/server/public/assets/${userState.picturePath}`}
+					src={`https://volunteer-xnpy.onrender.com/assets/${userState.picturePath}`}
 					className="profile-icon"
 					style={{ width: "50px" }}
 					alt="user-profile-icon"
@@ -236,9 +283,8 @@ const CreatePost = (props) => {
 							<input
 								type="file"
 								className="custom-file-input"
-								id="file"
-								name="postImage" onChange={handleImageChange}
-								accept="image/*, video/*"
+								id="file" onChange={handleImageChange}
+								accept="image/*"
 							/>
 							<label
 								className="custom-file-label upload-button inline-buttons"
