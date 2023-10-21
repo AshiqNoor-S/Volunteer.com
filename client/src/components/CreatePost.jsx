@@ -231,16 +231,20 @@ const CreatePost = (props) => {
 		// } catch (error) {
 		// 	console.error(error);
 		// }
+		try {
+			fetch('https://volunteer-xnpy.onrender.com/create-post', {
+				// fetch('http://localhost:3001/create-post', {
+				method: 'POST',
+				// crossDomain: true,
+				// headers: {
+				// 	"Content-Type": "application/json", Accept: "application/json",
+				// },
+				body: JSON.stringify({ id: id, postContent: postContent, user: firstName, postLocation: location, userEmail: userState.email, base64: file }),
+			}).then((res) => res.json()).then((data) => console.log(data));
+		} catch (e) {
+			alert(e);
+		}
 
-		fetch('https://volunteer-xnpy.onrender.com/create-post', {
-		// fetch('http://localhost:3001/create-post', {
-			method: 'POST',
-			// crossDomain: true,
-			headers: {
-				"Content-Type": "application/json", Accept: "application/json",
-			},
-			body: JSON.stringify({ id: id, postContent: postContent, user: firstName, postLocation: location, userEmail: userState.email, base64: file }),
-		}).then((res) => res.json()).then((data) => console.log(data));
 
 
 		// getLocation();
