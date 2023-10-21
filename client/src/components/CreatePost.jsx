@@ -236,9 +236,9 @@ const CreatePost = (props) => {
 				// fetch('http://localhost:3001/create-post', {
 				method: 'POST',
 				// crossDomain: true,
-				// headers: {
-				// 	"Content-Type": "application/json", Accept: "application/json",
-				// },
+				headers: {
+					"Content-Type": "application/json", Accept: "application/json",
+				},
 				body: JSON.stringify({ id: id, postContent: postContent, user: firstName, postLocation: location, userEmail: userState.email, base64: file }),
 			}).then((res) => res.json()).then((data) => console.log(data));
 		} catch (e) {
